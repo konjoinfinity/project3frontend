@@ -42,3 +42,8 @@ main {
   margin: auto;
   height: 100%;
 }
+
+.card-image {
+  max-height: 400px;
+  max-width: 300px;
+}
