@@ -21,8 +21,8 @@ class Pet extends Component {
                 </p>
                 <p>pet.species</p>
                 <button className="btn orange lighten-2"># of pet.licks</button>
+                <div className="card">pet.comments</div>
                 <div className="card">
-                  <div className="card">pet.comments</div>
                   <form>
                     <input
                       id="comment"
@@ -36,6 +36,7 @@ class Pet extends Component {
               </div>
               <div className="card-action">
                 <a href="#">pet.sociallink</a>
+                <i class="fab fa-twitter" />
               </div>
             </div>
           </div>
@@ -55,8 +56,8 @@ class Pet extends Component {
                 </p>
                 <p>pet.species</p>
                 <button className="btn orange lighten-2"># of pet.licks</button>
+                <div className="card">pet.comments</div>
                 <div className="card">
-                  <div className="card">pet.comments</div>
                   <form>
                     <input
                       id="comment"
@@ -70,6 +71,7 @@ class Pet extends Component {
               </div>
               <div className="card-action">
                 <a href="#">pet.sociallink</a>
+                <i class="fab fa-twitter" />
               </div>
             </div>
           </div>
@@ -89,8 +91,8 @@ class Pet extends Component {
                 </p>
                 <p>pet.species</p>
                 <button className="btn orange lighten-2"># of pet.licks</button>
+                <div className="card">pet.comments</div>
                 <div className="card">
-                  <div className="card">pet.comments</div>
                   <form>
                     <input
                       id="comment"
@@ -104,6 +106,7 @@ class Pet extends Component {
               </div>
               <div className="card-action">
                 <a href="#">pet.sociallink</a>
+                <i class="fab fa-twitter" />
               </div>
             </div>
           </div>
