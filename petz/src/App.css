@@ -7,6 +7,8 @@ i {
   color: #1895df;
 }
 
-.brand-logo {
+.logo {
+  padding-top: 5px;
+  padding-left: 10px;
   max-height: 50px;
 }

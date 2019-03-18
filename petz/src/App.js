@@ -8,14 +8,14 @@ class App extends Component {
     return (
       <div className="Nav">
         <nav>
-          <div class="nav-wrapper">
+          <div class="nav-wrapper blue lighten-3">
             <a href="#!" class="brand-logo">
-              <img src={petzlogo} alt="logo" />
+              <img src={petzlogo} alt="logo" class="logo" />
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger">
               <i class="material-icons">menu</i>
             </a>
-            <ul class="right hide-on-med-and-down">
+            <ul class="right">
               <li>
                 <a href="#">Pets</a>
               </li>
@@ -37,27 +37,6 @@ class App extends Component {
             </ul>
           </div>
         </nav>
-
-        <ul class="sidenav" id="mobile-demo">
-          <li>
-            <a href="#">Pets</a>
-          </li>
-          <li>
-            <a href="#">Add Pet</a>
-          </li>
-          <li>
-            <a href="#">Search</a>
-          </li>
-          <li>
-            <a href="#">Sign In</a>
-          </li>
-          <li>
-            <a href="#">Sign Up</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-        </ul>
         <Pet />
       </div>
     );
