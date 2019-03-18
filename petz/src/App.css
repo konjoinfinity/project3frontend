@@ -6,3 +6,7 @@
 i {
   color: #1895df;
 }
+
+.brand-logo {
+  max-height: 50px;
+}
