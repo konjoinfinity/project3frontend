@@ -1,0 +1,23 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "petz",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konjoinfinity/project3.git"
+  },
+  "keywords": [
+    "petz",
+    "oink"
+  ],
+  "author": "KAC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/konjoinfinity/project3/issues"
+  },
+  "homepage": "https://github.com/konjoinfinity/project3#readme"
+}
