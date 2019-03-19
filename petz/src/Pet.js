@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import petpic from "./cat.jpeg";
 import { Link } from "react-router-dom";
 
 class Pet extends Component {
@@ -34,22 +33,35 @@ class Pet extends Component {
           <div className="col">
             <div className="card">
               <div className="card-image">
-                <img src={petpic} alt="pet.profilepicture" />
+                <img
+                  src={this.state.pet && this.state.pet.profilepicture}
+                  alt="Profile"
+                  className="card-image"
+                />
                 <span className="card-title">
                   {this.state.pet && this.state.pet.name}
                 </span>
               </div>
               <div className="card-content">
                 <p>{this.state.pet && this.state.pet.description}</p>
-                <p>{this.state.pet && this.state.pet.species}</p>
+                <h4>Species - {this.state.pet && this.state.pet.species}</h4>
                 <form onSubmit={this.lickHandle}>
                   <button className="btn blue lighten-2">
                     # of licks {this.state.pet && this.state.pet.licks}
                   </button>
                 </form>
-                <div className="card">
-                  <div className="card-content">pet.comments</div>
-                </div>
+                {this.state.pet &&
+                  this.state.pet.comments.map((comment, id) => {
+                    return (
+                      <div className="card" key={id}>
+                        <div className="card-body">
+                          <div className="card-content">
+                            <p>{comment.message}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 <div className="card">
                   <div className="card-content">
                     <form onSubmit={this.commentHandle}>
