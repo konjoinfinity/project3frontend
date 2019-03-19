@@ -1,10 +1,46 @@
 import React, { Component } from "react";
 
 class New extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      description: "",
+      species: "",
+      profilepicture: "",
+      sociallink: ""
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Create PETZ!!!");
+    const data = this.state;
+    console.log(event);
+    fetch("http://localhost:3001/api/pets/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.props.history.push("/pets");
+        console.log(result);
+      });
   }
+
   render() {
     return (
       <div>
@@ -19,22 +55,27 @@ class New extends Component {
                     id="name"
                     name="name"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>Description </p>
                 <p>
                   <input
                     id="description"
-                    name="descriptoion"
+                    name="description"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>Species - Cat or Dog? </p>
                 <div>
                   <p>
-                    <select className="browser-default m5">
+                    <select
+                      className="browser-default m5"
+                      id="species"
+                      name="species"
+                      onChange={this.handleInputChange}
+                    >
                       <option defaultValue="" disabled>
                         Choose your option
                       </option>
@@ -43,15 +84,14 @@ class New extends Component {
                     </select>
                   </p>
                 </div>
-                {/* onChange={this.handleInputChange} */}
 
-                <p>Profile Picture </p>
+                <p>Profile Picture Link</p>
                 <p>
                   <input
                     id="profilepicture"
                     name="profilepicture"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>Social Link </p>
@@ -60,7 +100,7 @@ class New extends Component {
                     id="sociallink"
                     name="sociallink"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>

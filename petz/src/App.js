@@ -18,6 +18,15 @@ class App extends Component {
     this.state = {
       pets: ""
     };
+    this.getPets = this.getPets.bind(this);
+  }
+
+  getPets() {
+    fetch("http://localhost:3001/api/pets")
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ pets: res });
+      });
   }
 
   componentDidMount() {
@@ -38,7 +47,9 @@ class App extends Component {
             <Route
               path="/pets/:id"
               exact
-              render={props => <Pet {...props} pets={this.state.pets} />}
+              render={props => (
+                <Pet {...props} pets={this.state.pets} getPets={this.getPets} />
+              )}
             />
             <Route
               path="/pets"
