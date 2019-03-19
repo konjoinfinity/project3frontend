@@ -12,3 +12,8 @@ i {
   padding-left: 10px;
   max-height: 50px;
 }
+
+.tongue {
+  max-height: 55px;
+  max-width: 55px;
+}
