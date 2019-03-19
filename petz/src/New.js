@@ -68,7 +68,7 @@ class New extends Component {
                     onChange={this.handleInputChange}
                   />
                 </p>
-                <p>Species - Cat or Dog? </p>
+                <p>Species</p>
                 <div>
                   <p>
                     <select
@@ -77,6 +77,7 @@ class New extends Component {
                       name="species"
                       onChange={this.handleInputChange}
                     >
+                      <option defaultValue="">Cat or Dog?</option>
                       <option value="Cat">Cat</option>
                       <option value="Dog">Dog</option>
                     </select>

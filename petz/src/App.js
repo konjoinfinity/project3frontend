@@ -67,7 +67,13 @@ class App extends Component {
             <Route
               path="/pets/:id/edit"
               exact
-              render={props => <Edit {...props} pets={this.state.pets} />}
+              render={props => (
+                <Edit
+                  {...props}
+                  pets={this.state.pets}
+                  getPets={this.getPets}
+                />
+              )}
             />
             <Route
               path="/signin"

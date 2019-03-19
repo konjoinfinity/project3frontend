@@ -95,11 +95,9 @@ class Pet extends Component {
                 <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
                   <button className="btn blue lighten-2">Edit Pet</button>
                 </Link>
-                <p>
-                  <form onSubmit={this.deletePet}>
-                    <button className="btn red accent-3">Delete</button>
-                  </form>
-                </p>
+                <button className="btn red accent-3" onClick={this.deletePet}>
+                  Delete
+                </button>
               </div>
             </div>
           </div>
