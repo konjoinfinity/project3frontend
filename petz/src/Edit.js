@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 
-class New extends Component {
+class Edit extends Component {
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Create PETZ!!!");
+    console.log("Edit PETZ!!!");
   }
+
   render() {
     return (
       <div>
         <div className="card m-5">
           <div className="card-body">
             <div className="card-content">
-              <h1>Create New Pet</h1>
+              <h1>Edit Pet</h1>
               <form onSubmit={this.handleSubmit} action="/pets">
                 <p>Name </p>
                 <p>
@@ -19,39 +20,28 @@ class New extends Component {
                     id="name"
                     name="name"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    placeholder="this.state.pet.title"
+                    //   onChange="this.handleInputChange"
                   />
                 </p>
                 <p>Description </p>
                 <p>
                   <input
                     id="description"
-                    name="descriptoion"
+                    name="description"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    placeholder="this.state.pet.description"
+                    //   onChange="this.handleInputChange"
                   />
                 </p>
-                <p>Species - Cat or Dog? </p>
-                <div>
-                  <p>
-                    <select className="browser-default m5">
-                      <option defaultValue="" disabled>
-                        Choose your option
-                      </option>
-                      <option value="Cat">Cat</option>
-                      <option value="Dog">Dog</option>
-                    </select>
-                  </p>
-                </div>
-                {/* onChange={this.handleInputChange} */}
-
                 <p>Profile Picture </p>
                 <p>
                   <input
                     id="profilepicture"
                     name="profilepicture"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    placeholder="this.state.pet.profilepicture"
+                    //   onChange="this.handleInputChange"
                   />
                 </p>
                 <p>Social Link </p>
@@ -60,11 +50,12 @@ class New extends Component {
                     id="sociallink"
                     name="sociallink"
                     type="text"
-                    //   onChange={this.handleInputChange}
+                    placeholder="this.state.pet.sociallink"
+                    //   onChange="this.handleInputChange"
                   />
                 </p>
                 <p>
-                  <button className="btn orange lighten-2">Create Pet</button>
+                  <button className="btn orange lighten-2">Edit Pet</button>
                 </p>
               </form>
             </div>
@@ -75,4 +66,4 @@ class New extends Component {
   }
 }
 
-export default New;
+export default Edit;

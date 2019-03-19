@@ -8,11 +8,11 @@ class Nav extends Component {
     return (
       <div>
         <nav>
-          <div class="nav-wrapper blue lighten-3">
-            <a href="/" class="brand-logo">
-              <img src={petzlogo} alt="logo" class="logo" />
+          <div className="nav-wrapper blue lighten-3">
+            <a href="/" className="brand-logo">
+              <img src={petzlogo} alt="logo" className="logo" />
             </a>
-            <ul class="right">
+            <ul className="right">
               <li>
                 <Link to="/">Home</Link>
               </li>
