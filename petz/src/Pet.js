@@ -3,6 +3,22 @@ import "./App.css";
 import petpic from "./cat.jpeg";
 
 class Pet extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pet: null
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.props.match.params.id);
+    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ pet: res });
+      });
+  }
+
   lickHandle(event) {
     event.preventDefault();
     console.log("Lick");
@@ -19,17 +35,17 @@ class Pet extends Component {
             <div className="card">
               <div className="card-image">
                 <img src={petpic} alt="pet.profilepicture" />
-                <span className="card-title">Skywhiskers pet.name</span>
+                <span className="card-title">
+                  {this.state.pet && this.state.pet.name}
+                </span>
               </div>
               <div className="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively. pet.description
-                </p>
-                <p>pet.species</p>
+                <p>{this.state.pet && this.state.pet.description}</p>
+                <p>{this.state.pet && this.state.pet.species}</p>
                 <form onSubmit={this.lickHandle}>
-                  <button className="btn blue lighten-2"># of pet.licks</button>
+                  <button className="btn blue lighten-2">
+                    # of licks {this.state.pet && this.state.pet.licks}
+                  </button>
                 </form>
                 <div className="card">
                   <div className="card-content">pet.comments</div>
@@ -50,8 +66,8 @@ class Pet extends Component {
               </div>
               <div className="card-action">
                 <i className="fab fa-twitter" />
-                <a href="https://twitter.com">pet.sociallink</a>
-                <a href="/edit">
+                <a href={this.state.pet && this.state.pet.sociallink} />
+                <a href="/:id/edit">
                   <button className="btn orange lighten-2">Edit Pet</button>
                 </a>
                 <a href="/pet">

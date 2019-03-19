@@ -13,6 +13,21 @@ import Search from "./Search";
 import Edit from "./Edit";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pets: ""
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3001/api/pets")
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ pets: res });
+      });
+  }
+
   render() {
     return (
       <div>
@@ -20,11 +35,27 @@ class App extends Component {
         <main className="container">
           <Switch>
             <Route path="/" exact render={props => <Home {...props} />} />
-            <Route path="/pet" exact render={props => <Pet {...props} />} />
-            <Route path="/pets" exact render={props => <Pets {...props} />} />
-            <Route path="/new" exact render={props => <New {...props} />} />
+            <Route
+              path="/pets/:id"
+              exact
+              render={props => <Pet {...props} pets={this.state.pets} />}
+            />
+            <Route
+              path="/pets"
+              exact
+              render={props => <Pets {...props} pets={this.state.pets} />}
+            />
+            <Route
+              path="/new"
+              exact
+              render={props => <New {...props} pets={this.state.pets} />}
+            />
             <Route path="/about" exact render={props => <About {...props} />} />
-            <Route path="/edit" exact render={props => <Edit {...props} />} />
+            <Route
+              path="/pets/:id/edit"
+              exact
+              render={props => <Edit {...props} pets={this.state.pets} />}
+            />
             <Route
               path="/signin"
               exact
