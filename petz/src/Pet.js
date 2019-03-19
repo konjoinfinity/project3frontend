@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import petpic from "./cat.jpeg";
+import { Link } from "react-router-dom";
 
 class Pet extends Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class Pet extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
       .then(res => res.json())
       .then(res => {
@@ -65,16 +65,12 @@ class Pet extends Component {
                 </div>
               </div>
               <div className="card-action">
-                <i className="fab fa-twitter" />
-                <a href={this.state.pet && this.state.pet.sociallink} />
-                <a href="/:id/edit">
-                  <button className="btn orange lighten-2">Edit Pet</button>
-                </a>
-                <a href="/pet">
-                  <button className="btn blue lighten-2">
-                    Link to Pet Details
-                  </button>
-                </a>
+                <Link to={this.state.pet && this.state.pet.sociallink}>
+                  <i className="fab fa-twitter" />
+                </Link>
+                <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
+                  <button className="btn blue lighten-2">Edit Pet</button>
+                </Link>
               </div>
             </div>
           </div>
