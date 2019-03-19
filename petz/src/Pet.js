@@ -6,7 +6,7 @@ class Pet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pet: null
+      pet: ""
     };
   }
 
