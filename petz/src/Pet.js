@@ -8,6 +8,7 @@ class Pet extends Component {
     this.state = {
       pet: ""
     };
+    this.deletePet = this.deletePet.bind(this);
   }
 
   componentDidMount() {
@@ -22,10 +23,21 @@ class Pet extends Component {
     event.preventDefault();
     console.log("Lick");
   }
+
   commentHandle(event) {
     event.preventDefault();
     console.log("Comment");
   }
+
+  deletePet(event) {
+    event.preventDefault();
+    fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
+      method: "DELETE"
+    })
+      .then(this.props.history.push("/pets"))
+      .finally(() => this.props.getPets());
+  }
+
   render() {
     return (
       <div>
@@ -83,6 +95,11 @@ class Pet extends Component {
                 <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
                   <button className="btn blue lighten-2">Edit Pet</button>
                 </Link>
+                <p>
+                  <form onSubmit={this.deletePet}>
+                    <button className="btn red accent-3">Delete</button>
+                  </form>
+                </p>
               </div>
             </div>
           </div>
