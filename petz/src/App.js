@@ -59,7 +59,9 @@ class App extends Component {
             <Route
               path="/new"
               exact
-              render={props => <New {...props} pets={this.state.pets} />}
+              render={props => (
+                <New {...props} pets={this.state.pets} getPets={this.getPets} />
+              )}
             />
             <Route path="/about" exact render={props => <About {...props} />} />
             <Route

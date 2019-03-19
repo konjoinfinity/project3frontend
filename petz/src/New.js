@@ -38,7 +38,8 @@ class New extends Component {
       .then(result => {
         this.props.history.push("/pets");
         console.log(result);
-      });
+      })
+      .finally(() => this.props.getPets());
   }
 
   render() {
@@ -76,9 +77,6 @@ class New extends Component {
                       name="species"
                       onChange={this.handleInputChange}
                     >
-                      <option defaultValue="" disabled>
-                        Choose your option
-                      </option>
                       <option value="Cat">Cat</option>
                       <option value="Dog">Dog</option>
                     </select>
