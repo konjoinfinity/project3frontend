@@ -7,8 +7,10 @@ class Pet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pet: null
+      pet: "",
+      licks: ""
     };
+    this.lickHandle = this.lickHandle.bind(this);
   }
 
   componentDidMount() {
@@ -16,13 +18,26 @@ class Pet extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ pet: res });
+        this.setState({ licks: res.licks });
       });
   }
 
+  // .then(res => {
+  //   this.setState({ licks: res[0].licks });
+
   lickHandle(event) {
     event.preventDefault();
-    console.log("Lick");
+    console.log(this.state.pet);
+    console.log("Number of current licks", this.state.licks);
+    let licks = this.state.licks + 1;
+    this.setState(
+      {
+        licks
+      },
+      () => console.log("Number of new locks", this.state.licks)
+    );
   }
+
   commentHandle(event) {
     event.preventDefault();
     console.log("Comment");
@@ -43,8 +58,11 @@ class Pet extends Component {
                 <p>{this.state.pet && this.state.pet.description}</p>
                 <p>{this.state.pet && this.state.pet.species}</p>
                 <form onSubmit={this.lickHandle}>
-                  <button className="btn blue lighten-2">
-                    # of licks {this.state.pet && this.state.pet.licks}
+                  <button
+                    onClick={this.lickHandle}
+                    className="btn blue lighten-2"
+                  >
+                    # of licks {this.state.licks}
                   </button>
                 </form>
                 <div className="card">
