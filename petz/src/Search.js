@@ -7,9 +7,11 @@ class Search extends Component {
 		super(props);
 		this.state = {
 			input: "*",
-			petList: []
+			petList: [],
+			species: ""
 		};
 		this.updateName = this.updateName.bind(this);
+		this.updateSpecies = this.updateSpecies.bind(this);
 	}
 
 	componentDidMount() {
@@ -29,27 +31,45 @@ class Search extends Component {
 		});
 	}
 
-	updateResults() {}
+	updateSpecies(event) {
+		this.setState({ species: event.target.value }, () => {
+			this.setState({ species: this.state.species });
+		});
+	}
 
 	render() {
 		let results = [];
 
 		this.state.petList
-			.filter(pet =>
-				pet.name.toUpperCase().includes(this.state.input.toUpperCase())
+			.filter(
+				pet =>
+					pet.name.toUpperCase().includes(this.state.input.toUpperCase()) &&
+					pet.species === this.state.species
 			)
+
 			.map(pet => {
 				results.push(<SearchCard key={this.id} data={pet} />);
 			});
 
 		return (
 			<div>
-				<h2>I'm looking for a</h2>
-				<select style={{ display: "inline" }}>
-					<option value="cat">cat</option>
-					<option value="dog">dog</option>
-				</select>{" "}
-				<h2>named...</h2>
+				<h2>
+					I'm looking for a
+					<div className="input-field">
+						<select
+							style={{ display: "inline" }}
+							value={this.state.species}
+							onChange={this.updateSpecies}
+						>
+							<option value="" disabled selected>
+								Choose your option
+							</option>
+							<option value="Cat">cat</option>
+							<option value="Dog">dog</option>
+						</select>
+					</div>
+					named...
+				</h2>
 				<input
 					type="text"
 					onChange={this.updateName}
