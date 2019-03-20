@@ -17,7 +17,7 @@ class Pets extends Component {
               <p>{pet.description}</p>
               <p>{pet.species}</p>
               <p>{pet.profilepicture}</p>
-              <p>{pet.licks}</p>
+              <p>{pet.licks} licks</p>
               <a href={pet.sociallink}>Twitter or Instagram</a>
             </div>
           </div>
