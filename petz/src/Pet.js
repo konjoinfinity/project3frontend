@@ -14,6 +14,7 @@ class Pet extends Component {
     this.deletePet = this.deletePet.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleComment = this.handleComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   componentDidMount() {
