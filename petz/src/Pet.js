@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Pet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pet: ""
+      pet: "",
+      comment: ""
     };
+
     this.deletePet = this.deletePet.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleComment = this.handleComment.bind(this);
   }
 
   componentDidMount() {
@@ -24,9 +29,32 @@ class Pet extends Component {
     console.log("Lick");
   }
 
-  commentHandle(event) {
+  handleComment(event) {
     event.preventDefault();
-    console.log("Comment");
+    console.log(event);
+    axios
+      .put(
+        `http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
+        {
+          comment: this.state.comment
+        }
+      )
+      .then(response => console.log(response))
+      .then(result => {
+        console.log(result);
+      });
+    this.componentDidMount();
+    this.props.history.push(`/pet/${this.state.pet._id}/`);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   deletePet(event) {
@@ -46,20 +74,18 @@ class Pet extends Component {
             <div className="card">
               <div className="card-image">
                 <img
-                  src={this.state.pet && this.state.pet.profilepicture}
+                  src={this.state.pet.profilepicture}
                   alt="Profile"
                   className="card-image"
                 />
-                <span className="card-title">
-                  {this.state.pet && this.state.pet.name}
-                </span>
+                <span className="card-title">{this.state.pet.name}</span>
               </div>
               <div className="card-content">
-                <p>{this.state.pet && this.state.pet.description}</p>
-                <h4>Species - {this.state.pet && this.state.pet.species}</h4>
+                <p>{this.state.pet.description}</p>
+                <h4>Species - {this.state.pet.species}</h4>
                 <form onSubmit={this.lickHandle}>
                   <button className="btn blue lighten-2">
-                    # of licks {this.state.pet && this.state.pet.licks}
+                    # of licks {this.state.pet.licks}
                   </button>
                 </form>
                 {this.state.pet &&
@@ -76,12 +102,12 @@ class Pet extends Component {
                   })}
                 <div className="card">
                   <div className="card-content">
-                    <form onSubmit={this.commentHandle}>
+                    <form onSubmit={this.handleComment}>
                       <input
                         id="comment"
                         name="comment"
                         type="text"
-                        placeholder="pet.comments"
+                        onChange={this.handleInputChange}
                       />
                       <button className="btn orange lighten-2">Comment</button>
                     </form>
