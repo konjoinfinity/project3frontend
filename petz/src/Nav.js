@@ -13,27 +13,46 @@ class Nav extends Component {
               <img src={petzlogo} alt="logo" className="logo" />
             </a>
             <ul className="right">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/pets">Pets</Link>
-              </li>
-              <li>
-                <Link to="/new">New</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/signin">Sign In</Link>
-              </li>
-              <li>
-                <Link to="/signup">Sign Up</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/pets">Pets</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/new">New</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/search">Search</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === false && (
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === false && (
+                <li>
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/logout">Logout</Link>
+                </li>
+              )}
             </ul>
           </div>
         </nav>

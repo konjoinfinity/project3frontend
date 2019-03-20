@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-class Signup extends Component {
+class Signin extends Component {
   render() {
     return (
       <div className="card m-5">
         <div className="card-body">
           <div className="card-content">
-            <h2>Sign Up</h2>
+            <h2>Log In</h2>
 
             <form>
               <div>
@@ -19,7 +19,6 @@ class Signup extends Component {
                   />
                 </p>
               </div>
-
               <div>
                 <p>Password</p>
                 <p>
@@ -33,9 +32,9 @@ class Signup extends Component {
               <button
                 className="btn orange lighten-1"
                 type="submit"
-                onClick={this.props.handleSignUp}
+                onClick={this.props.handleLogIn}
               >
-                Sign Up
+                Log In
               </button>
             </form>
           </div>
@@ -45,4 +44,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default Signin;
