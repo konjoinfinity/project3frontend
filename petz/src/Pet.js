@@ -30,7 +30,6 @@ class Pet extends Component {
   }
 
   handleComment(event) {
-    event.preventDefault();
     console.log(event);
     axios
       .put(
@@ -44,7 +43,7 @@ class Pet extends Component {
         console.log(result);
       });
     this.componentDidMount();
-    this.props.history.push(`/pet/${this.state.pet._id}/`);
+    this.props.history.push(`/pets/${this.state.pet._id}/`);
   }
 
   handleInputChange(event) {
@@ -64,6 +63,23 @@ class Pet extends Component {
     })
       .then(this.props.history.push("/pets"))
       .finally(() => this.props.getPets());
+  }
+
+  deleteComment(event) {
+    console.log(event);
+    axios
+      .put(
+        `http://localhost:3001/api/pets/${this.state.pet._id}/comment/delete`,
+        {
+          body: event.target.dataset.id
+        }
+      )
+      .then(response => console.log(response))
+      .then(result => {
+        console.log(result);
+      });
+    this.componentDidMount();
+    this.props.history.push(`/pets/${this.props.match.params.id}/`);
   }
 
   render() {
@@ -96,6 +112,16 @@ class Pet extends Component {
                           <div className="card-content">
                             <p>{comment.message}</p>
                           </div>
+                          <form
+                            data-id={comment._id}
+                            onSubmit={this.deleteComment}
+                          >
+                            <p>
+                              <button className="btn red accent-3">
+                                Delete
+                              </button>
+                            </p>
+                          </form>
                         </div>
                       </div>
                     );
