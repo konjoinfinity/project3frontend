@@ -1,0 +1,24 @@
+.comment-card {
+	background: rgba(239, 168, 81, 0.5);
+	margin: 25px;
+	padding: 15px;
+	font-size: 20px;
+	border-radius: 5px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row;
+}
+
+.comment-card .date {
+	font-size: 12px;
+}
+
+.comment-card img {
+	max-height: 100px;
+	margin-right: 25px;
+}
+
+.comment-card a:hover {
+	color: rgb(3, 112, 165);
+}

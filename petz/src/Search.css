@@ -1,0 +1,16 @@
+.search-text {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.search-text h2 {
+	margin: 25px 20px 0 0;
+}
+
+.search-text select,
+.search-text input {
+	display: inline !important;
+	max-width: 400px;
+	align-self: flex-end;
+}

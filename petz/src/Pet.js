@@ -17,18 +17,18 @@ class Pet extends Component {
     this.deleteComment = this.deleteComment.bind(this);
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ pet: res });
-      });
-  }
+	componentDidMount() {
+		fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+			.then(res => res.json())
+			.then(res => {
+				this.setState({ pet: res });
+			});
+	}
 
-  lickHandle(event) {
-    event.preventDefault();
-    console.log("Lick");
-  }
+	lickHandle(event) {
+		event.preventDefault();
+		console.log("Lick");
+	}
 
   handleComment(event) {
     console.log(event);
@@ -57,14 +57,14 @@ class Pet extends Component {
     });
   }
 
-  deletePet(event) {
-    event.preventDefault();
-    fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
-      method: "DELETE"
-    })
-      .then(this.props.history.push("/pets"))
-      .finally(() => this.props.getPets());
-  }
+	deletePet(event) {
+		event.preventDefault();
+		fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
+			method: "DELETE"
+		})
+			.then(this.props.history.push("/pets"))
+			.finally(() => this.props.getPets());
+	}
 
   deleteComment(event) {
     console.log(event);
