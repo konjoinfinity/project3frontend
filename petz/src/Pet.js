@@ -36,6 +36,7 @@ class Pet extends Component {
       },
       () => console.log("Number of new locks", this.state.licks)
     );
+    this.btn.setAttribute("disabled", "disabled");
   }
 
   commentHandle(event) {
@@ -59,6 +60,9 @@ class Pet extends Component {
                 <p>{this.state.pet && this.state.pet.species}</p>
                 <form onSubmit={this.lickHandle}>
                   <button
+                    ref={btn => {
+                      this.btn = btn;
+                    }}
                     onClick={this.lickHandle}
                     className="btn blue lighten-2"
                   >
