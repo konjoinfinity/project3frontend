@@ -114,7 +114,11 @@ class App extends Component {
               path="/pets/:id"
               exact
               render={props => (
-                <Pet {...props} pets={this.state && this.state.pets} />
+                <Pet
+                  {...props}
+                  pets={this.state && this.state.pets}
+                  getPets={this.state && this.getPets}
+                />
               )}
             />
             <Route
