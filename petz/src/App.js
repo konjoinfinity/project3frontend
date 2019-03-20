@@ -47,9 +47,7 @@ class App extends Component {
             <Route
               path="/pets/:id"
               exact
-              render={props => (
-                <Pet {...props} pets={this.state.pets} getPets={this.getPets} />
-              )}
+              render={props => <Pet {...props} pets={this.state.pets} />}
             />
             <Route
               path="/pets"
@@ -59,13 +57,21 @@ class App extends Component {
             <Route
               path="/new"
               exact
-              render={props => <New {...props} pets={this.state.pets} />}
+              render={props => (
+                <New {...props} pets={this.state.pets} getPets={this.getPets} />
+              )}
             />
             <Route path="/about" exact render={props => <About {...props} />} />
             <Route
               path="/pets/:id/edit"
               exact
-              render={props => <Edit {...props} pets={this.state.pets} />}
+              render={props => (
+                <Edit
+                  {...props}
+                  pets={this.state.pets}
+                  getPets={this.getPets}
+                />
+              )}
             />
             <Route
               path="/signin"

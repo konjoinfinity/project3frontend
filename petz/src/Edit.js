@@ -1,9 +1,53 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Edit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: null,
+      description: null,
+      profilepicture: null,
+      sociallink: null
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidMount() {
+    axios
+      .get(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+      .then(res => {
+        this.setState({ ...res.data });
+      });
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Edit PETZ!!!");
+    const data = this.state;
+    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.props.history.push(`/pets/${this.props.match.params.id}`);
+        console.log(result);
+      })
+      .finally(() => this.props.getPets());
   }
 
   render() {
@@ -20,8 +64,8 @@ class Edit extends Component {
                     id="name"
                     name="name"
                     type="text"
-                    placeholder="this.state.pet.title"
-                    //   onChange="this.handleInputChange"
+                    defaultValue={this.state && this.state.name}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>Description </p>
@@ -30,8 +74,8 @@ class Edit extends Component {
                     id="description"
                     name="description"
                     type="text"
-                    placeholder="this.state.pet.description"
-                    //   onChange="this.handleInputChange"
+                    defaultValue={this.state && this.state.description}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>Profile Picture </p>
@@ -40,8 +84,8 @@ class Edit extends Component {
                     id="profilepicture"
                     name="profilepicture"
                     type="text"
-                    placeholder="this.state.pet.profilepicture"
-                    //   onChange="this.handleInputChange"
+                    defaultValue={this.state && this.state.profilepicture}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>Social Link </p>
@@ -50,8 +94,8 @@ class Edit extends Component {
                     id="sociallink"
                     name="sociallink"
                     type="text"
-                    placeholder="this.state.pet.sociallink"
-                    //   onChange="this.handleInputChange"
+                    defaultValue={this.state && this.state.sociallink}
+                    onChange={this.handleInputChange}
                   />
                 </p>
                 <p>
