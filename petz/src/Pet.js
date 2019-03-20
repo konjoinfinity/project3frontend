@@ -102,7 +102,11 @@ class Pet extends Component {
                 <h4>Species - {this.state.pet.species}</h4>
                 <form onSubmit={this.lickHandle}>
                   <button className="btn blue lighten-2">
-                    # of licks {this.state.pet.licks}
+                    # of licks{" "}
+                    <span role="img" aria-label="dog">
+                      🐶
+                    </span>{" "}
+                    {this.state.pet.licks}
                   </button>
                 </form>
               </div>
