@@ -14,6 +14,12 @@ class SearchCard extends Component {
 						</Link>
 					</h3>
 					<p>{this.props.data.description}</p>
+					<p>
+						<select>
+							<option>1</option>
+							<option>2</option>
+						</select>
+					</p>
 				</div>
 			</div>
 		);

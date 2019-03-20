@@ -44,14 +44,17 @@ class Search extends Component {
 
 		return (
 			<div>
-				<h1>I'm looking for a dog named...</h1>
-				<form>
-					<input
-						type="text"
-						onChange={this.updateName}
-						placeholder="Search pets by name..."
-					/>
-				</form>
+				<h2>I'm looking for a</h2>
+				<select style={{ display: "inline" }}>
+					<option value="cat">cat</option>
+					<option value="dog">dog</option>
+				</select>{" "}
+				<h2>named...</h2>
+				<input
+					type="text"
+					onChange={this.updateName}
+					placeholder="Search pets by name..."
+				/>
 				{results}
 			</div>
 		);
