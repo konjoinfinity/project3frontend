@@ -10,7 +10,7 @@ class Pet extends Component {
 			pet: "",
 			comment: ""
 		};
-
+		this.handleLick = this.handleLick.bind(this);
 		this.deletePet = this.deletePet.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleComment = this.handleComment.bind(this);
@@ -25,9 +25,25 @@ class Pet extends Component {
 			});
 	}
 
-	lickHandle(event) {
-		event.preventDefault();
-		console.log("Lick");
+	handleLick(event) {
+		// event.preventDefault();
+		const data = this.state;
+		console.log("Number of current licks", this.state.pet.licks);
+		fetch(
+			`http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
+			{
+				method: "PUT",
+				headers: {
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify(data)
+			}
+		)
+			.then(response => response.json())
+			.then(result => {
+				console.log(result);
+			});
+		this.props.history.push(`/pets/${this.props.match.params.id}/`);
 	}
 
 	handleComment(event) {
@@ -89,24 +105,23 @@ class Pet extends Component {
 				<div className="row">
 					<div className="col">
 						<div className="card">
+							<div className="card-image">
+								<img
+									src={this.state.pet.profilepicture}
+									alt="Profile"
+									className="card-image"
+								/>
+								<span className="card-title">{this.state.pet.name}</span>
+							</div>
 							<div className="card-content">
-								<div className="card-image">
-									<img
-										src={this.state.pet.profilepicture}
-										alt="Profile"
-										className="card-image"
-									/>
-									<span className="card-title">{this.state.pet.name}</span>
-								</div>
 								<p>{this.state.pet.description}</p>
 								<h4>Species - {this.state.pet.species}</h4>
-								<form onSubmit={this.lickHandle}>
-									<button className="btn blue lighten-2">
-										# of licks{" "}
-										<span role="img" aria-label="dog">
-											🐶
-										</span>{" "}
-										{this.state.pet.licks}
+								<form onSubmit={this.handleLick}>
+									<button
+										// onClick={this.handleLick}
+										className="btn blue lighten-2"
+									>
+										# of licks {this.state.pet.licks}
 									</button>
 								</form>
 							</div>
