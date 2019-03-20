@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchCard from "./Components/SearchCard";
 import "./Search.css";
+import petsUrl from "./Constants";
 
 class Search extends Component {
 	constructor(props) {
@@ -16,8 +17,9 @@ class Search extends Component {
 	}
 
 	componentDidMount() {
+		console.log(petsUrl);
 		axios
-			.get("http://localhost:3001/api/pets")
+			.get(petsUrl)
 			.then(res => this.setState({ petList: res.data }))
 			.catch(err => console.log(err));
 	}
@@ -49,7 +51,7 @@ class Search extends Component {
 			)
 
 			.map(pet => {
-				results.push(<SearchCard key={this.id} data={pet} />);
+				return results.push(<SearchCard key={pet._id} data={pet} />);
 			});
 
 		return (
@@ -57,7 +59,7 @@ class Search extends Component {
 				<div className="search-text input-field">
 					<h2>I'm looking for a</h2>
 					<select value={this.state.species} onChange={this.updateSpecies}>
-						<option value="" disabled selected>
+						<option value="" disabled>
 							Select a species
 						</option>
 						<option value="Cat">cat</option>
