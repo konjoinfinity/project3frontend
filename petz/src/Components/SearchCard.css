@@ -1,0 +1,19 @@
+.search-card {
+	display: flex;
+	flex-direction: row;
+	margin: 25px;
+	background: rgba(172, 206, 226, 0.5);
+	padding: 25px;
+}
+
+.search-card img {
+	max-height: 250px;
+	max-width: 250px;
+	border-radius: 25px;
+	margin-right: 25px;
+}
+
+.search-card .pet-data {
+	display: flex;
+	flex-direction: column;
+}

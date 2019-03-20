@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import SearchCard from "./Components/SearchCard";
 
 class Search extends Component {
 	constructor(props) {
@@ -38,12 +39,12 @@ class Search extends Component {
 				pet.name.toUpperCase().includes(this.state.input.toUpperCase())
 			)
 			.map(pet => {
-				results.push(pet);
+				results.push(<SearchCard key={this.id} data={pet} />);
 			});
 
 		return (
 			<div>
-				<h1>Search for a pet</h1>
+				<h1>I'm looking for a dog named...</h1>
 				<form>
 					<input
 						type="text"
@@ -51,8 +52,7 @@ class Search extends Component {
 						placeholder="Search pets by name..."
 					/>
 				</form>
-				{this.state.input}
-				{/* {this.state.petList} */}
+				{results}
 			</div>
 		);
 	}
