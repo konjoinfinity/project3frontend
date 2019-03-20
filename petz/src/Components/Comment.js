@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Comment.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class Comment extends Component {
 	constructor(props) {
@@ -20,10 +21,18 @@ class Comment extends Component {
 		const readDate = new Date(this.props.data.createdAt);
 		return (
 			<div className="comment-card">
-				<p>{this.props.data.message}</p>
-				<p className="date">
-					Posted by {this.state.pet.name} on {readDate.toLocaleString()}
-				</p>
+				<img src={this.state.pet.profilepicture} alt={this.state.pet.name} />
+
+				<div className="comment-info">
+					{this.props.data.message}
+					<p className="date">
+						Posted by{" "}
+						<Link to={"/pets/" + this.state.pet._id}>
+							{this.state.pet.name}
+						</Link>{" "}
+						on {readDate.toLocaleString()}
+					</p>
+				</div>
 			</div>
 		);
 	}
