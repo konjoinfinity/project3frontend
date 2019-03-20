@@ -9,16 +9,20 @@ class Pets extends Component {
         return (
           <div className="song card mt-3" key={id}>
             <div className="card-body">
-              <p>
-                <Link to={"/pets/" + pet._id}>
-                  <button className="btn orange lighten-2">{pet.name}</button>
-                </Link>
-              </p>
-              <p>{pet.description}</p>
-              <p>{pet.species}</p>
-              <p>{pet.profilepicture}</p>
-              <p>{pet.licks}</p>
-              <a href={pet.sociallink}>Twitter or Instagram</a>
+              <div className="card-content">
+                <div className="card-image">
+                  <img
+                    src={pet.profilepicture}
+                    alt="profilepic"
+                    className="profile-pic"
+                  />
+                </div>
+                <p>
+                  <Link to={"/pets/" + pet._id}>
+                    <button className="btn orange lighten-2">{pet.name}</button>
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         );
