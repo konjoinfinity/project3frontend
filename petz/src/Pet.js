@@ -22,9 +22,6 @@ class Pet extends Component {
       });
   }
 
-  // .then(res => {
-  //   this.setState({ licks: res[0].licks });
-
   lickHandle(event) {
     event.preventDefault();
     console.log(this.state.pet);
@@ -34,7 +31,7 @@ class Pet extends Component {
       {
         licks
       },
-      () => console.log("Number of new locks", this.state.licks)
+      () => console.log("Number of new licks", this.state.licks)
     );
     this.btn.setAttribute("disabled", "disabled");
   }
