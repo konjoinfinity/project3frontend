@@ -17,7 +17,6 @@ class Search extends Component {
 	}
 
 	componentDidMount() {
-		console.log(petsUrl);
 		axios
 			.get(petsUrl)
 			.then(res => this.setState({ petList: res.data }))
