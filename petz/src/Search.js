@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SearchCard from "./Components/SearchCard";
+import "./Search.css";
 
 class Search extends Component {
 	constructor(props) {
@@ -53,28 +54,25 @@ class Search extends Component {
 
 		return (
 			<div>
-				<h2>
-					I'm looking for a
-					<div className="input-field">
-						<select
-							style={{ display: "inline" }}
-							value={this.state.species}
-							onChange={this.updateSpecies}
-						>
-							<option value="" disabled selected>
-								Choose your option
-							</option>
-							<option value="Cat">cat</option>
-							<option value="Dog">dog</option>
-						</select>
-					</div>
-					named...
-				</h2>
-				<input
-					type="text"
-					onChange={this.updateName}
-					placeholder="Search pets by name..."
-				/>
+				<div className="search-text input-field">
+					<h2>I'm looking for a</h2>
+					<select value={this.state.species} onChange={this.updateSpecies}>
+						<option value="" disabled selected>
+							Select a species
+						</option>
+						<option value="Cat">cat</option>
+						<option value="Dog">dog</option>
+					</select>
+				</div>
+				<div className="search-text input-field">
+					<h2>named</h2>
+					<input
+						type="text"
+						onChange={this.updateName}
+						placeholder="Start typing a name"
+					/>
+					<h2>...</h2>
+				</div>
 				{results}
 			</div>
 		);
