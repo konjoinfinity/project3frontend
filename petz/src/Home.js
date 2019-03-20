@@ -28,10 +28,9 @@ class Home extends Component {
 		);
 		return (
 			<div>
-				<h1>Welcome to Petz!</h1>
-				<h3>
+				<h2>
 					<em>The Daily Fire Hydrant</em>
-				</h3>
+				</h2>
 				{results}
 			</div>
 		);

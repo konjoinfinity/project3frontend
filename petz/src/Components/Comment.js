@@ -3,7 +3,13 @@ import "./Comment.css";
 
 class Comment extends Component {
 	render() {
-		return <div className="comment-card">{this.props.data.message}</div>;
+		const readDate = new Date(this.props.data.createdAt);
+		return (
+			<div className="comment-card">
+				<p>{this.props.data.message}</p>
+				<p className="date">{readDate.toLocaleString()}</p>
+			</div>
+		);
 	}
 }
 
