@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./App.css";
 import Pet from "./Pet";
 import Pets from "./Pets";
@@ -7,14 +8,12 @@ import Home from "./Home";
 import Nav from "./Nav";
 import New from "./New";
 import About from "./About";
-import Signin from "./Login";
-import Signup from "./Signup";
 import Search from "./Search";
 import Edit from "./Edit";
 import axios from "axios";
-import SignUpForm from "./Signup";
-import LogInForm from "./Login";
-import LogOut from "./Logout";
+import Signup from "./Signup";
+import Login from "./Login";
+import Logout from "./Logout";
 
 class App extends Component {
   constructor(props) {
@@ -82,7 +81,7 @@ class App extends Component {
         localStorage.token = response.data.token;
         this.setState({ isLoggedIn: true });
         console.log("User has signed up");
-        this.props.history.push("/songs");
+        this.props.history.push("/pets");
       })
       .catch(err => console.log(err));
   }
@@ -98,14 +97,14 @@ class App extends Component {
         localStorage.token = response.data.token;
         this.setState({ isLoggedIn: true });
         console.log("User is logged in");
-        this.props.history.push("/songs");
+        this.props.history.push("/pets");
       })
       .catch(err => console.log(err));
   }
 
   render() {
     return (
-      <div>
+      <div className="App">
         <Nav isLoggedIn={this.state.isLoggedIn} />
 
         <main className="container">
@@ -149,16 +148,6 @@ class App extends Component {
               )}
             />
             <Route
-              path="/signin"
-              exact
-              render={props => <Signin {...props} />}
-            />
-            <Route
-              path="/signup"
-              exact
-              render={props => <Signup {...props} />}
-            />
-            <Route
               path="/search"
               exact
               render={props => <Search {...props} />}
@@ -167,7 +156,8 @@ class App extends Component {
               path="/signup"
               render={props => {
                 return (
-                  <SignUpForm
+                  <Signup
+                    {...props}
                     isLoggedIn={this.state.isLoggedIn}
                     handleInput={this.handleInput}
                     handleSignUp={this.handleSignUp}
@@ -179,7 +169,8 @@ class App extends Component {
               path="/logout"
               render={props => {
                 return (
-                  <LogOut
+                  <Logout
+                    {...props}
                     isLoggedIn={this.state.isLoggedIn}
                     handleLogOut={this.handleLogOut}
                   />
@@ -190,7 +181,8 @@ class App extends Component {
               path="/login"
               render={props => {
                 return (
-                  <LogInForm
+                  <Login
+                    {...props}
                     isLoggedIn={this.state.isLoggedIn}
                     handleInput={this.handleInput}
                     handleLogIn={this.handleLogIn}
@@ -205,4 +197,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
