@@ -23,7 +23,7 @@ class Pets extends Component {
                 <h3>
                   Licks{" "}
                   <span role="img" aria-label="lick">
-                    🐶
+                    {pet.species === "Dog" ? "🐶" : "🐱"}
                   </span>{" "}
                   {pet.licks}
                 </h3>
