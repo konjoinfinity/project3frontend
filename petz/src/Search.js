@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchCard from "./Components/SearchCard";
 import "./Search.css";
-import petsUrl from "./Constants";
+import apiUrl from "./Constants";
 
 class Search extends Component {
 	constructor(props) {
@@ -18,7 +18,7 @@ class Search extends Component {
 
 	componentDidMount() {
 		axios
-			.get(petsUrl)
+			.get(apiUrl + "pets")
 			.then(res => this.setState({ petList: res.data }))
 			.catch(err => console.log(err));
 	}

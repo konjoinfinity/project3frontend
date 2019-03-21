@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import apiUrl from "./Constants";
 
 class Pet extends Component {
 	constructor(props) {
@@ -20,7 +21,7 @@ class Pet extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+		fetch(apiUrl + `pets/${this.props.match.params.id}`)
 			.then(res => res.json())
 			.then(res => {
 				this.setState({ pet: res });
@@ -32,16 +33,13 @@ class Pet extends Component {
 	handleLick(event) {
 		event.preventDefault();
 		const data = this.state;
-		fetch(
-			`http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
-			{
-				method: "PUT",
-				headers: {
-					"Content-type": "application/json"
-				},
-				body: JSON.stringify(data)
-			}
-		)
+		fetch(apiUrl + `pets/${this.props.match.params.id}/licks`, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
 			.then(response => response.json())
 			.then(result => {
 				// console.log(result);
@@ -52,12 +50,9 @@ class Pet extends Component {
 	handleComment(event) {
 		console.log(event);
 		axios
-			.put(
-				`http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
-				{
-					message: this.state.comment
-				}
-			)
+			.put(apiUrl + `pets/${this.props.match.params.id}/comment`, {
+				message: this.state.comment
+			})
 			.then(response => console.log(response))
 			.then(result => {
 				console.log(result);
@@ -78,7 +73,7 @@ class Pet extends Component {
 
 	deletePet(event) {
 		event.preventDefault();
-		fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
+		fetch(apiUrl + `pets/${this.state.pet._id}`, {
 			method: "DELETE"
 		})
 			.then(this.props.history.push("/pets"))
@@ -88,12 +83,9 @@ class Pet extends Component {
 	deleteComment(event) {
 		console.log(event);
 		axios
-			.put(
-				`http://localhost:3001/api/pets/${this.state.pet._id}/comment/delete`,
-				{
-					body: event.target.dataset.id
-				}
-			)
+			.put(apiUrl + `pets/${this.state.pet._id}/comment/delete`, {
+				body: event.target.dataset.id
+			})
 			.then(response => console.log(response))
 			.then(result => {
 				console.log(result);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import Comment from "./Components/Comment";
+import apiUrl from "./Constants";
 
 class Home extends Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ class Home extends Component {
 
 	componentDidMount() {
 		axios
-			.get("http://localhost:3001/api/comments")
+			.get(apiUrl + "comments")
 			.then(res => {
 				this.setState({ comments: res.data });
 			})
