@@ -11,11 +11,21 @@ class Pet extends Component {
       licks: "",
       comment: ""
     };
+    this.getPet = this.getPet.bind(this);
     this.handleLick = this.handleLick.bind(this);
     this.deletePet = this.deletePet.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleComment = this.handleComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
+  }
+
+  getPet() {
+    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ pet: res });
+        this.setState({ licks: res.licks });
+      });
   }
 
   componentDidMount() {
@@ -44,24 +54,21 @@ class Pet extends Component {
       .then(result => {
         // console.log(result);
         this.setState({ licks: result.licks });
-      });
+      })
+      .finally(() => this.props.getPets());
   }
 
   handleComment(event) {
-    console.log(event);
-    axios
-      .put(
-        `http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
-        {
-          message: this.state.comment
-        }
-      )
-      .then(response => console.log(response))
-      .then(result => {
-        console.log(result);
-      });
-    this.componentDidMount();
-    this.props.history.push(`/pets/${this.state.pet._id}/`);
+    console.log(this.state.comment);
+    event.preventDefault();
+    axios.put(
+      `http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
+      {
+        message: this.state.comment
+      }
+    );
+    this.getPet();
+    console.log(this.state.pet);
   }
 
   handleInputChange(event) {
@@ -125,7 +132,7 @@ class Pet extends Component {
                 </button>
               </div>
               <div className="card-action">
-                <Link to={this.state.pet && this.state.pet.sociallink}>
+                <Link to={this.state.pet.sociallink}>
                   <i className="fab fa-twitter" />
                 </Link>
                 <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
