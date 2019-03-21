@@ -63,42 +63,58 @@ class Nav extends Component {
         <ul className="sidenav" id="mobile-nav">
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className="sidenav-close">
+                Home
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/pets">Pets</Link>
+              <Link to="/pets" className="sidenav-close">
+                Pets
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/new">New</Link>
+              <Link to="/new" className="sidenav-close">
+                New
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/search">Search</Link>
+              <Link to="/search" className="sidenav-close">
+                Search
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about" className="sidenav-close">
+                About
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === false && (
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="sidenav-close">
+                Login
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === false && (
             <li>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup" className="sidenav-close">
+                Sign Up
+              </Link>
             </li>
           )}
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout" className="sidenav-close">
+                Logout
+              </Link>
             </li>
           )}
         </ul>
