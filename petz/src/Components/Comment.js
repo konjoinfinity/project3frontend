@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Comment.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import apiUrl from "../Constants";
 
 class Comment extends Component {
 	constructor(props) {
@@ -13,11 +14,10 @@ class Comment extends Component {
 	}
 	componentDidMount() {
 		axios
-			.get(`http://localhost:3001/api/comments/${this.state.id}/author`)
+			.get(apiUrl + `comments/${this.state.id}/author`)
 			.then(res => this.setState({ pet: res.data }));
 	}
 	render() {
-		console.log(this.state.pet.name);
 		const readDate = new Date(this.props.data.createdAt);
 		return (
 			<div className="comment-card">

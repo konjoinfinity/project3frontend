@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchCard from "./Components/SearchCard";
 import "./Search.css";
-import petsUrl from "./Constants";
+import apiUrl from "./Constants";
 
 class Search extends Component {
   constructor(props) {
@@ -16,12 +16,14 @@ class Search extends Component {
     this.updateSpecies = this.updateSpecies.bind(this);
   }
 
-  componentDidMount() {
-    axios
-      .get(petsUrl)
-      .then(res => this.setState({ petList: res.data }))
-      .catch(err => console.log(err));
-  }
+
+	componentDidMount() {
+		axios
+			.get(apiUrl + "pets")
+			.then(res => this.setState({ petList: res.data }))
+			.catch(err => console.log(err));
+	}
+
 
   updateName(event) {
     this.setState({ input: event.target.value }, () => {

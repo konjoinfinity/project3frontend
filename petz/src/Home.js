@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import Comment from "./Components/Comment";
+import apiUrl from "./Constants";
 
 class Home extends Component {
   constructor(props) {
@@ -11,15 +12,15 @@ class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:3001/api/comments")
-      .then(res => {
-        const limitedArray = res.data.slice(0, 5);
-        this.setState({ comments: limitedArray });
-      })
-      .catch(err => console.log(err));
-  }
+	componentDidMount() {
+		axios
+			.get(apiUrl + "comments")
+			.then(res => {
+				this.setState({ comments: res.data });
+			})
+			.catch(err => console.log(err));
+	}
+
 
   render() {
     let results = [];

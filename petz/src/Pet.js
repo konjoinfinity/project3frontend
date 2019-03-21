@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import apiUrl from "./Constants";
 
 class Pet extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pet: "",
-      // licks: "",
-      comment: ""
+      licks: "",
+      comment: "",
+      comments: []
     };
-    this.getPet = this.getPet.bind(this);
     this.handleLick = this.handleLick.bind(this);
     this.deletePet = this.deletePet.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -19,38 +20,26 @@ class Pet extends Component {
     this.deleteComment = this.deleteComment.bind(this);
   }
 
-  getPet() {
-    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ pet: res });
-        // this.setState({ licks: res.licks });
-      });
-  }
-
   componentDidMount() {
-    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+    fetch(apiUrl + `pets/${this.props.match.params.id}`)
       .then(res => res.json())
       .then(res => {
         this.setState({ pet: res });
-        // this.setState({ licks: res.licks });
+        this.setState({ licks: res.licks });
+        this.setState({ comments: res.comments });
       });
   }
 
   handleLick(event) {
     event.preventDefault();
     const data = this.state;
-    console.log(data);
-    fetch(
-      `http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    )
+    fetch(apiUrl + `pets/${this.props.match.params.id}/licks`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
       .then(response => response.json())
       .then(result => {
         // console.log(result);
@@ -60,24 +49,24 @@ class Pet extends Component {
   }
 
   handleComment(event) {
-    console.log(this.state.comment);
     event.preventDefault();
-    axios.put(
-      `http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
-      {
+    console.log(event);
+    axios
+      .put(apiUrl + `pets/${this.props.match.params.id}/comment`, {
         message: this.state.comment
-      }
-    );
-    this.getPet();
-    this.props.history.push(`/pets/${this.props.match.params.id}/`);
-    console.log(this.state.pet);
+      })
+      .then(response => console.log(response))
+      .then(result => {
+        console.log(result);
+      });
+    this.componentDidMount();
+    this.props.history.push(`/pets/${this.state.pet._id}/`);
   }
 
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
@@ -85,7 +74,7 @@ class Pet extends Component {
 
   deletePet(event) {
     event.preventDefault();
-    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`, {
+    fetch(apiUrl + `pets/${this.state.pet._id}`, {
       method: "DELETE"
     })
       .then(this.props.history.push("/pets"))
@@ -93,15 +82,15 @@ class Pet extends Component {
   }
 
   deleteComment(event) {
-    event.preventDefault();
+    console.log(event);
     axios
-      .put(
-        `http://localhost:3001/api/pets/${this.state.pet._id}/comment/delete`,
-        {
-          body: event.target.dataset.id
-        }
-      )
-      .then(response => console.log(response));
+      .put(apiUrl + `pets/${this.state.pet._id}/comment/delete`, {
+        body: event.target.dataset.id
+      })
+      .then(response => console.log(response))
+      .then(result => {
+        console.log(result);
+      });
     this.componentDidMount();
     this.props.history.push(`/pets/${this.props.match.params.id}/`);
   }
