@@ -8,7 +8,7 @@ class Pet extends Component {
     super(props);
     this.state = {
       pet: "",
-      // licks: "",
+      licks: "",
       comment: ""
     };
     this.handleLick = this.handleLick.bind(this);
@@ -23,7 +23,7 @@ class Pet extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ pet: res });
-        // this.setState({ licks: res });
+        this.setState({ licks: res.licks });
       });
   }
 
@@ -37,9 +37,8 @@ class Pet extends Component {
   //   }
 
   handleLick(event) {
-    // event.preventDefault();
+    event.preventDefault();
     const data = this.state;
-    console.log("Number of current licks", this.state.pet.licks);
     fetch(
       `http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
       {
@@ -52,9 +51,9 @@ class Pet extends Component {
     )
       .then(response => response.json())
       .then(result => {
-        console.log(result);
+        // console.log(result);
+        this.setState({ licks: result.licks });
       });
-    this.props.history.push(`/pets/${this.props.match.params.id}/`);
   }
 
   handleComment(event) {
@@ -132,7 +131,7 @@ class Pet extends Component {
                     // onClick={this.handleLick}
                     className="btn blue lighten-2"
                   >
-                    # of licks {this.state.pet.licks}
+                    # of licks {this.state.licks}
                   </button>
                 </form>
               </div>
