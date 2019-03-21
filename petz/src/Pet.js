@@ -53,8 +53,13 @@ class Pet extends Component {
     )
       .then(response => response.json())
       .then(result => {
+<<<<<<< HEAD
         console.log(result);
         this.setState({ pet: result });
+=======
+        // console.log(result);
+        this.setState({ licks: result.licks });
+>>>>>>> bug-branch
       })
       .finally(() => this.props.getPets());
   }
@@ -108,6 +113,7 @@ class Pet extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <div className="row">
           <div className="col">
@@ -140,46 +146,84 @@ class Pet extends Component {
                 <button className="btn red accent-3" onClick={this.deletePet}>
                   Delete
                 </button>
+=======
+      this.props.isLoggedIn === true && (
+        <div>
+          <div className="row">
+            <div className="col">
+              <div className="card">
+                <div className="card-image">
+                  <img
+                    src={this.state.pet.profilepicture}
+                    alt="Profile"
+                    className="card-image"
+                  />
+                  <span className="card-title">{this.state.pet.name}</span>
+                </div>
+                <div className="card-content">
+                  <p>{this.state.pet.description}</p>
+                  <h4>Species - {this.state.pet.species}</h4>
+                  <button
+                    onClick={this.handleLick}
+                    className="btn blue lighten-2"
+                  >
+                    # of licks {this.state.licks}
+                  </button>
+                </div>
+                <div className="card-action">
+                  <Link to={this.state.pet && this.state.pet.sociallink}>
+                    <i className="fab fa-twitter" />
+                  </Link>
+                  <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
+                    <button className="btn blue lighten-2">Edit Pet</button>
+                  </Link>
+                  <button className="btn red accent-3" onClick={this.deletePet}>
+                    Delete
+                  </button>
+                </div>
+>>>>>>> bug-branch
               </div>
-            </div>
-            {this.state.pet &&
-              this.state.pet.comments.map((comment, id) => {
-                return (
-                  <div className="card" key={id}>
-                    <div className="card-body">
-                      <div className="card-content">
-                        <p>{comment.message}</p>
-                      </div>
-                      <div className="card-action">
-                        <form
-                          data-id={comment._id}
-                          onSubmit={this.deleteComment}
-                        >
-                          <p>
-                            <button className="btn red accent-3">Delete</button>
-                          </p>
-                        </form>
+              {this.state.pet &&
+                this.state.pet.comments.map((comment, id) => {
+                  return (
+                    <div className="card" key={id}>
+                      <div className="card-body">
+                        <div className="card-content">
+                          <p>{comment.message}</p>
+                        </div>
+                        <div className="card-action">
+                          <form
+                            data-id={comment._id}
+                            onSubmit={this.deleteComment}
+                          >
+                            <p>
+                              <button className="btn red accent-3">
+                                Delete
+                              </button>
+                            </p>
+                          </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            <div className="card">
-              <div className="card-content">
-                <form onSubmit={this.handleComment}>
-                  <input
-                    id="comment"
-                    name="comment"
-                    type="text"
-                    onChange={this.handleInputChange}
-                  />
-                  <button className="btn orange lighten-2">Comment</button>
-                </form>
+                  );
+                })}
+              <div className="card">
+                <div className="card-content">
+                  <form onSubmit={this.handleComment}>
+                    <input
+                      id="comment"
+                      name="comment"
+                      type="text"
+                      onChange={this.handleInputChange}
+                    />
+                    <button className="btn orange lighten-2">Comment</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )
     );
   }
 }

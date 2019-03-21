@@ -50,7 +50,9 @@ class Nav extends Component {
               )}
               {this.props.isLoggedIn === true && (
                 <li>
-                  <Link to="/logout">Logout</Link>
+                  <Link to="/logout" onClick={this.props.handleLogOut}>
+                    Logout
+                  </Link>
                 </li>
               )}
             </ul>

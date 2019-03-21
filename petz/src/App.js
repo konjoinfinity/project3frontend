@@ -13,7 +13,6 @@ import Edit from "./Edit";
 import axios from "axios";
 import Signup from "./Signup";
 import Login from "./Login";
-import Logout from "./Logout";
 
 class App extends Component {
   constructor(props) {
@@ -81,7 +80,7 @@ class App extends Component {
         localStorage.token = response.data.token;
         this.setState({ isLoggedIn: true });
         console.log("User has signed up");
-        this.props.history.push("/pets");
+        this.props.history.push("/");
       })
       .catch(err => console.log(err));
   }
@@ -105,11 +104,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav isLoggedIn={this.state.isLoggedIn} />
+        <Nav
+          isLoggedIn={this.state.isLoggedIn}
+          handleLogOut={this.handleLogOut}
+        />
 
         <main className="container">
           <Switch>
-            <Route path="/" exact render={props => <Home {...props} />} />
+            <Route
+              path="/"
+              exact
+              render={props => (
+                <Home {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
+            />
             <Route
               path="/pets/:id"
               exact
@@ -118,6 +126,7 @@ class App extends Component {
                   {...props}
                   pets={this.state && this.state.pets}
                   getPets={this.state && this.getPets}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               )}
             />
@@ -125,7 +134,11 @@ class App extends Component {
               path="/pets"
               exact
               render={props => (
-                <Pets {...props} pets={this.state && this.state.pets} />
+                <Pets
+                  {...props}
+                  pets={this.state && this.state.pets}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
               )}
             />
             <Route
@@ -136,10 +149,17 @@ class App extends Component {
                   {...props}
                   pets={this.state && this.state.pets}
                   getPets={this.state && this.getPets}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               )}
             />
-            <Route path="/about" exact render={props => <About {...props} />} />
+            <Route
+              path="/about"
+              exact
+              render={props => (
+                <About {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
+            />
             <Route
               path="/pets/:id/edit"
               exact
@@ -148,13 +168,16 @@ class App extends Component {
                   {...props}
                   pets={this.state && this.state.pets}
                   getPets={this.state && this.getPets}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               )}
             />
             <Route
               path="/search"
               exact
-              render={props => <Search {...props} />}
+              render={props => (
+                <Search {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
             />
             <Route
               path="/signup"
@@ -165,18 +188,6 @@ class App extends Component {
                     isLoggedIn={this.state.isLoggedIn}
                     handleInput={this.handleInput}
                     handleSignUp={this.handleSignUp}
-                  />
-                );
-              }}
-            />
-            <Route
-              path="/logout"
-              render={props => {
-                return (
-                  <Logout
-                    {...props}
-                    isLoggedIn={this.state.isLoggedIn}
-                    handleLogOut={this.handleLogOut}
                   />
                 );
               }}
