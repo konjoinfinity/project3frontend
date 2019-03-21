@@ -1,54 +1,53 @@
 import React, { Component } from "react";
 import axios from "axios";
+import apiUrl from "./Constants";
 
 class Edit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: null,
-      description: null,
-      profilepicture: null,
-      sociallink: null
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: null,
+			description: null,
+			profilepicture: null,
+			sociallink: null
+		};
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  componentDidMount() {
-    axios
-      .get(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
-      .then(res => {
-        this.setState({ ...res.data });
-      });
-  }
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	componentDidMount() {
+		axios.get(apiUrl + `pets/${this.props.match.params.id}`).then(res => {
+			this.setState({ ...res.data });
+		});
+	}
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
-  }
+		this.setState({
+			[name]: value
+		});
+	}
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const data = this.state;
-    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.props.history.push(`/pets/${this.props.match.params.id}`);
-        console.log(result);
-      })
-      .finally(() => this.props.getPets());
-  }
+	handleSubmit(event) {
+		event.preventDefault();
+		const data = this.state;
+		fetch(apiUrl + `pets/${this.props.match.params.id}`, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
+			.then(response => response.json())
+			.then(result => {
+				this.props.history.push(`/pets/${this.props.match.params.id}`);
+				console.log(result);
+			})
+			.finally(() => this.props.getPets());
+	}
 
   render() {
     return (
