@@ -12,6 +12,9 @@ class Nav extends Component {
             <a href="/" className="brand-logo">
               <img src={petzlogo} alt="logo" className="logo" />
             </a>
+            <a href="#" className="sidenav-trigger" data-target="mobile-nav">
+              <i className="material-icons">menu</i>
+            </a>
             <ul className="right">
               {this.props.isLoggedIn === true && (
                 <li>
@@ -56,6 +59,49 @@ class Nav extends Component {
             </ul>
           </div>
         </nav>
+
+        <ul className="sidenav" id="mobile-nav">
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/pets">Pets</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/new">New</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/search">Search</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === false && (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === false && (
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/logout">Logout</Link>
+            </li>
+          )}
+        </ul>
       </div>
     );
   }
