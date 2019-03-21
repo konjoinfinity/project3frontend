@@ -17,7 +17,6 @@ class Comment extends Component {
 			.then(res => this.setState({ pet: res.data }));
 	}
 	render() {
-		console.log(this.state.pet.name);
 		const readDate = new Date(this.props.data.createdAt);
 		return (
 			<div className="comment-card">

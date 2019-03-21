@@ -15,8 +15,7 @@ class Home extends Component {
 		axios
 			.get("http://localhost:3001/api/comments")
 			.then(res => {
-				const limitedArray = res.data.slice(0, 5);
-				this.setState({ comments: limitedArray });
+				this.setState({ comments: res.data });
 			})
 			.catch(err => console.log(err));
 	}
