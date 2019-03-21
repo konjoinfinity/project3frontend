@@ -12,10 +12,10 @@ class Nav extends Component {
             <a href="/" className="brand-logo">
               <img src={petzlogo} alt="logo" className="logo" />
             </a>
-            <a href="#" className="sidenav-trigger" data-target="mobile-nav">
+            <a href="/" className="sidenav-trigger" data-target="mobile-nav">
               <i className="material-icons">menu</i>
             </a>
-            <ul className="right">
+            <ul className="right hide-on-med-and-down">
               {this.props.isLoggedIn === true && (
                 <li>
                   <Link to="/">Home</Link>
@@ -114,7 +114,11 @@ class Nav extends Component {
           )}
           {this.props.isLoggedIn === true && (
             <li>
-              <Link to="/logout" className="sidenav-close">
+              <Link
+                to="/logout"
+                onClick={this.props.handleLogOut}
+                className="sidenav-close"
+              >
                 Logout
               </Link>
             </li>
