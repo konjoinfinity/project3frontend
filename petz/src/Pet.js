@@ -44,7 +44,8 @@ class Pet extends Component {
       .then(result => {
         // console.log(result);
         this.setState({ licks: result.licks });
-      });
+      })
+      .finally(() => this.props.getPets());
   }
 
   handleComment(event) {
