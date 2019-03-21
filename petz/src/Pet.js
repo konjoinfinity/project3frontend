@@ -4,179 +4,178 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Pet extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			pet: "",
-			comment: ""
-		};
-		this.handleLick = this.handleLick.bind(this);
-		this.deletePet = this.deletePet.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleComment = this.handleComment.bind(this);
-		this.deleteComment = this.deleteComment.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      pet: "",
+      licks: "",
+      comment: ""
+    };
+    this.handleLick = this.handleLick.bind(this);
+    this.deletePet = this.deletePet.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleComment = this.handleComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+  }
 
-	componentDidMount() {
-		fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
-			.then(res => res.json())
-			.then(res => {
-				this.setState({ pet: res });
-			});
-	}
+  componentDidMount() {
+    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ pet: res });
+        this.setState({ licks: res.licks });
+      });
+  }
 
-	handleLick(event) {
-		// event.preventDefault();
-		const data = this.state;
-		console.log("Number of current licks", this.state.pet.licks);
-		fetch(
-			`http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
-			{
-				method: "PUT",
-				headers: {
-					"Content-type": "application/json"
-				},
-				body: JSON.stringify(data)
-			}
-		)
-			.then(response => response.json())
-			.then(result => {
-				console.log(result);
-			});
-		this.props.history.push(`/pets/${this.props.match.params.id}/`);
-	}
+  handleLick(event) {
+    event.preventDefault();
+    const data = this.state;
+    fetch(
+      `http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    )
+      .then(response => response.json())
+      .then(result => {
+        // console.log(result);
+        this.setState({ licks: result.licks });
+      });
+  }
 
-	handleComment(event) {
-		console.log(event);
-		axios
-			.put(
-				`http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
-				{
-					message: this.state.comment
-				}
-			)
-			.then(response => console.log(response))
-			.then(result => {
-				console.log(result);
-			});
-		this.componentDidMount();
-		this.props.history.push(`/pets/${this.state.pet._id}/`);
-	}
+  handleComment(event) {
+    console.log(event);
+    axios
+      .put(
+        `http://localhost:3001/api/pets/${this.props.match.params.id}/comment`,
+        {
+          message: this.state.comment
+        }
+      )
+      .then(response => console.log(response))
+      .then(result => {
+        console.log(result);
+      });
+    this.componentDidMount();
+    this.props.history.push(`/pets/${this.state.pet._id}/`);
+  }
 
-	handleInputChange(event) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
 
-		this.setState({
-			[name]: value
-		});
-	}
+    this.setState({
+      [name]: value
+    });
+  }
 
-	deletePet(event) {
-		event.preventDefault();
-		fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
-			method: "DELETE"
-		})
-			.then(this.props.history.push("/pets"))
-			.finally(() => this.props.getPets());
-	}
+  deletePet(event) {
+    event.preventDefault();
+    fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
+      method: "DELETE"
+    })
+      .then(this.props.history.push("/pets"))
+      .finally(() => this.props.getPets());
+  }
 
-	deleteComment(event) {
-		console.log(event);
-		axios
-			.put(
-				`http://localhost:3001/api/pets/${this.state.pet._id}/comment/delete`,
-				{
-					body: event.target.dataset.id
-				}
-			)
-			.then(response => console.log(response))
-			.then(result => {
-				console.log(result);
-			});
-		this.componentDidMount();
-		this.props.history.push(`/pets/${this.props.match.params.id}/`);
-	}
+  deleteComment(event) {
+    console.log(event);
+    axios
+      .put(
+        `http://localhost:3001/api/pets/${this.state.pet._id}/comment/delete`,
+        {
+          body: event.target.dataset.id
+        }
+      )
+      .then(response => console.log(response))
+      .then(result => {
+        console.log(result);
+      });
+    this.componentDidMount();
+    this.props.history.push(`/pets/${this.props.match.params.id}/`);
+  }
 
-	render() {
-		return (
-			<div>
-				<div className="row">
-					<div className="col">
-						<div className="card">
-							<div className="card-image">
-								<img
-									src={this.state.pet.profilepicture}
-									alt="Profile"
-									className="card-image"
-								/>
-								<span className="card-title">{this.state.pet.name}</span>
-							</div>
-							<div className="card-content">
-								<p>{this.state.pet.description}</p>
-								<h4>Species - {this.state.pet.species}</h4>
-								<form onSubmit={this.handleLick}>
-									<button
-										// onClick={this.handleLick}
-										className="btn blue lighten-2"
-									>
-										# of licks {this.state.pet.licks}
-									</button>
-								</form>
-							</div>
-							<div className="card-action">
-								<Link to={this.state.pet && this.state.pet.sociallink}>
-									<i className="fab fa-twitter" />
-								</Link>
-								<Link to={"/pets/" + this.props.match.params.id + "/edit"}>
-									<button className="btn blue lighten-2">Edit Pet</button>
-								</Link>
-								<button className="btn red accent-3" onClick={this.deletePet}>
-									Delete
-								</button>
-							</div>
-						</div>
-						{this.state.pet &&
-							this.state.pet.comments.map((comment, id) => {
-								return (
-									<div className="card" key={id}>
-										<div className="card-body">
-											<div className="card-content">
-												<p>{comment.message}</p>
-											</div>
-											<div className="card-action">
-												<form
-													data-id={comment._id}
-													onSubmit={this.deleteComment}
-												>
-													<p>
-														<button className="btn red accent-3">Delete</button>
-													</p>
-												</form>
-											</div>
-										</div>
-									</div>
-								);
-							})}
-						<div className="card">
-							<div className="card-content">
-								<form onSubmit={this.handleComment}>
-									<input
-										id="comment"
-										name="comment"
-										type="text"
-										onChange={this.handleInputChange}
-									/>
-									<button className="btn orange lighten-2">Comment</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <div className="row">
+          <div className="col">
+            <div className="card">
+              <div className="card-image">
+                <img
+                  src={this.state.pet.profilepicture}
+                  alt="Profile"
+                  className="card-image"
+                />
+                <span className="card-title">{this.state.pet.name}</span>
+              </div>
+              <div className="card-content">
+                <p>{this.state.pet.description}</p>
+                <h4>Species - {this.state.pet.species}</h4>
+                <button
+                  onClick={this.handleLick}
+                  className="btn blue lighten-2"
+                >
+                  # of licks {this.state.licks}
+                </button>
+              </div>
+              <div className="card-action">
+                <Link to={this.state.pet && this.state.pet.sociallink}>
+                  <i className="fab fa-twitter" />
+                </Link>
+                <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
+                  <button className="btn blue lighten-2">Edit Pet</button>
+                </Link>
+                <button className="btn red accent-3" onClick={this.deletePet}>
+                  Delete
+                </button>
+              </div>
+            </div>
+            {this.state.pet &&
+              this.state.pet.comments.map((comment, id) => {
+                return (
+                  <div className="card" key={id}>
+                    <div className="card-body">
+                      <div className="card-content">
+                        <p>{comment.message}</p>
+                      </div>
+                      <div className="card-action">
+                        <form
+                          data-id={comment._id}
+                          onSubmit={this.deleteComment}
+                        >
+                          <p>
+                            <button className="btn red accent-3">Delete</button>
+                          </p>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            <div className="card">
+              <div className="card-content">
+                <form onSubmit={this.handleComment}>
+                  <input
+                    id="comment"
+                    name="comment"
+                    type="text"
+                    onChange={this.handleInputChange}
+                  />
+                  <button className="btn orange lighten-2">Comment</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Pet;
