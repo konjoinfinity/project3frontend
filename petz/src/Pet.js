@@ -8,7 +8,7 @@ class Pet extends Component {
     super(props);
     this.state = {
       pet: "",
-      licks: "",
+      // licks: "",
       comment: ""
     };
     this.getPet = this.getPet.bind(this);
@@ -24,7 +24,7 @@ class Pet extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ pet: res });
-        this.setState({ licks: res.licks });
+        // this.setState({ licks: res.licks });
       });
   }
 
@@ -33,13 +33,14 @@ class Pet extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ pet: res });
-        this.setState({ licks: res.licks });
+        // this.setState({ licks: res.licks });
       });
   }
 
   handleLick(event) {
     event.preventDefault();
     const data = this.state;
+    console.log(data);
     fetch(
       `http://localhost:3001/api/pets/${this.props.match.params.id}/licks`,
       {
@@ -52,8 +53,8 @@ class Pet extends Component {
     )
       .then(response => response.json())
       .then(result => {
-        // console.log(result);
-        this.setState({ licks: result.licks });
+        console.log(result);
+        this.setState({ pet: result });
       })
       .finally(() => this.props.getPets());
   }
@@ -68,6 +69,7 @@ class Pet extends Component {
       }
     );
     this.getPet();
+    this.props.history.push(`/pets/${this.props.match.params.id}/`);
     console.log(this.state.pet);
   }
 
@@ -83,7 +85,7 @@ class Pet extends Component {
 
   deletePet(event) {
     event.preventDefault();
-    fetch(`http://localhost:3001/api/pets/${this.state.pet._id}`, {
+    fetch(`http://localhost:3001/api/pets/${this.props.match.params.id}`, {
       method: "DELETE"
     })
       .then(this.props.history.push("/pets"))
@@ -91,7 +93,7 @@ class Pet extends Component {
   }
 
   deleteComment(event) {
-    console.log(event);
+    event.preventDefault();
     axios
       .put(
         `http://localhost:3001/api/pets/${this.state.pet._id}/comment/delete`,
@@ -99,10 +101,7 @@ class Pet extends Component {
           body: event.target.dataset.id
         }
       )
-      .then(response => console.log(response))
-      .then(result => {
-        console.log(result);
-      });
+      .then(response => console.log(response));
     this.componentDidMount();
     this.props.history.push(`/pets/${this.props.match.params.id}/`);
   }
@@ -128,7 +127,7 @@ class Pet extends Component {
                   onClick={this.handleLick}
                   className="btn blue lighten-2"
                 >
-                  # of licks {this.state.licks}
+                  # of licks {this.state.pet.licks}
                 </button>
               </div>
               <div className="card-action">
