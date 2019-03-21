@@ -5,12 +5,12 @@ import Comment from "./Components/Comment";
 import apiUrl from "./Constants";
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			comments: []
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: []
+    };
+  }
 
 	componentDidMount() {
 		axios
@@ -21,20 +21,23 @@ class Home extends Component {
 			.catch(err => console.log(err));
 	}
 
-	render() {
-		let results = [];
-		this.state.comments.map(comment =>
-			results.push(<Comment data={comment} key={comment._id} />)
-		);
-		return (
-			<div>
-				<h2>
-					<em>The Daily Fire Hydrant</em>
-				</h2>
-				{results}
-			</div>
-		);
-	}
+
+  render() {
+    let results = [];
+    this.state.comments.map(comment =>
+      results.push(<Comment data={comment} key={comment._id} />)
+    );
+    return (
+      this.props.isLoggedIn === true && (
+        <div>
+          <h2>
+            <em>The Daily Fire Hydrant</em>
+          </h2>
+          {results}
+        </div>
+      )
+    );
+  }
 }
 
 export default Home;

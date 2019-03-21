@@ -5,16 +5,17 @@ import "./Search.css";
 import apiUrl from "./Constants";
 
 class Search extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			input: "*",
-			petList: [],
-			species: ""
-		};
-		this.updateName = this.updateName.bind(this);
-		this.updateSpecies = this.updateSpecies.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: "*",
+      petList: [],
+      species: ""
+    };
+    this.updateName = this.updateName.bind(this);
+    this.updateSpecies = this.updateSpecies.bind(this);
+  }
+
 
 	componentDidMount() {
 		axios
@@ -23,61 +24,64 @@ class Search extends Component {
 			.catch(err => console.log(err));
 	}
 
-	updateName(event) {
-		this.setState({ input: event.target.value }, () => {
-			if (this.state.input === "") {
-				this.setState({ input: "*" });
-			} else {
-				this.setState({ input: this.state.input });
-			}
-		});
-	}
 
-	updateSpecies(event) {
-		this.setState({ species: event.target.value }, () => {
-			this.setState({ species: this.state.species });
-		});
-	}
+  updateName(event) {
+    this.setState({ input: event.target.value }, () => {
+      if (this.state.input === "") {
+        this.setState({ input: "*" });
+      } else {
+        this.setState({ input: this.state.input });
+      }
+    });
+  }
 
-	render() {
-		let results = [];
+  updateSpecies(event) {
+    this.setState({ species: event.target.value }, () => {
+      this.setState({ species: this.state.species });
+    });
+  }
 
-		this.state.petList
-			.filter(
-				pet =>
-					pet.name.toUpperCase().includes(this.state.input.toUpperCase()) &&
-					pet.species === this.state.species
-			)
+  render() {
+    let results = [];
 
-			.map(pet => {
-				return results.push(<SearchCard key={pet._id} data={pet} />);
-			});
+    this.state.petList
+      .filter(
+        pet =>
+          pet.name.toUpperCase().includes(this.state.input.toUpperCase()) &&
+          pet.species === this.state.species
+      )
 
-		return (
-			<div>
-				<div className="search-text input-field">
-					<h2>I'm looking for a</h2>
-					<select value={this.state.species} onChange={this.updateSpecies}>
-						<option value="" disabled>
-							Select a species
-						</option>
-						<option value="Cat">cat</option>
-						<option value="Dog">dog</option>
-					</select>
-				</div>
-				<div className="search-text input-field">
-					<h2>named</h2>
-					<input
-						type="text"
-						onChange={this.updateName}
-						placeholder="Start typing a name"
-					/>
-					<h2>...</h2>
-				</div>
-				{results}
-			</div>
-		);
-	}
+      .map(pet => {
+        return results.push(<SearchCard key={pet._id} data={pet} />);
+      });
+
+    return (
+      this.props.isLoggedIn === true && (
+        <div>
+          <div className="search-text input-field">
+            <h2>I'm looking for a</h2>
+            <select value={this.state.species} onChange={this.updateSpecies}>
+              <option value="" disabled>
+                Select a species
+              </option>
+              <option value="Cat">cat</option>
+              <option value="Dog">dog</option>
+            </select>
+          </div>
+          <div className="search-text input-field">
+            <h2>named</h2>
+            <input
+              type="text"
+              onChange={this.updateName}
+              placeholder="Start typing a name"
+            />
+            <h2>...</h2>
+          </div>
+          {results}
+        </div>
+      )
+    );
+  }
 }
 
 export default Search;

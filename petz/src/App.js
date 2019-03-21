@@ -13,8 +13,8 @@ import Edit from "./Edit";
 import axios from "axios";
 import Signup from "./Signup";
 import Login from "./Login";
-import Logout from "./Logout";
 import apiUrl from "./Constants";
+
 
 class App extends Component {
 	constructor(props) {
@@ -82,10 +82,10 @@ class App extends Component {
 				localStorage.token = response.data.token;
 				this.setState({ isLoggedIn: true });
 				console.log("User has signed up");
-				this.props.history.push("/pets");
+				this.props.history.push("/");
 			})
 			.catch(err => console.log(err));
-	}
+  }
 
 	handleLogIn(e) {
 		e.preventDefault();
@@ -103,103 +103,115 @@ class App extends Component {
 			.catch(err => console.log(err));
 	}
 
-	render() {
-		return (
-			<div className="App">
-				<Nav isLoggedIn={this.state.isLoggedIn} />
+  render() {
+    return (
+      <div className="App">
+        <Nav
+          isLoggedIn={this.state.isLoggedIn}
+          handleLogOut={this.handleLogOut}
+        />
 
-				<main className="container">
-					<Switch>
-						<Route path="/" exact render={props => <Home {...props} />} />
-						<Route
-							path="/pets/:id"
-							exact
-							render={props => (
-								<Pet
-									{...props}
-									pets={this.state && this.state.pets}
-									getPets={this.state && this.getPets}
-								/>
-							)}
-						/>
-						<Route
-							path="/pets"
-							exact
-							render={props => (
-								<Pets {...props} pets={this.state && this.state.pets} />
-							)}
-						/>
-						<Route
-							path="/new"
-							exact
-							render={props => (
-								<New
-									{...props}
-									pets={this.state && this.state.pets}
-									getPets={this.state && this.getPets}
-								/>
-							)}
-						/>
-						<Route path="/about" exact render={props => <About {...props} />} />
-						<Route
-							path="/pets/:id/edit"
-							exact
-							render={props => (
-								<Edit
-									{...props}
-									pets={this.state && this.state.pets}
-									getPets={this.state && this.getPets}
-								/>
-							)}
-						/>
-						<Route
-							path="/search"
-							exact
-							render={props => <Search {...props} />}
-						/>
-						<Route
-							path="/signup"
-							render={props => {
-								return (
-									<Signup
-										{...props}
-										isLoggedIn={this.state.isLoggedIn}
-										handleInput={this.handleInput}
-										handleSignUp={this.handleSignUp}
-									/>
-								);
-							}}
-						/>
-						<Route
-							path="/logout"
-							render={props => {
-								return (
-									<Logout
-										{...props}
-										isLoggedIn={this.state.isLoggedIn}
-										handleLogOut={this.handleLogOut}
-									/>
-								);
-							}}
-						/>
-						<Route
-							path="/login"
-							render={props => {
-								return (
-									<Login
-										{...props}
-										isLoggedIn={this.state.isLoggedIn}
-										handleInput={this.handleInput}
-										handleLogIn={this.handleLogIn}
-									/>
-								);
-							}}
-						/>
-					</Switch>
-				</main>
-			</div>
-		);
-	}
+        <main className="container">
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={props => (
+                <Home {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              path="/pets/:id"
+              exact
+              render={props => (
+                <Pet
+                  {...props}
+                  pets={this.state && this.state.pets}
+                  getPets={this.state && this.getPets}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
+            />
+            <Route
+              path="/pets"
+              exact
+              render={props => (
+                <Pets
+                  {...props}
+                  pets={this.state && this.state.pets}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
+            />
+            <Route
+              path="/new"
+              exact
+              render={props => (
+                <New
+                  {...props}
+                  pets={this.state && this.state.pets}
+                  getPets={this.state && this.getPets}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
+            />
+            <Route
+              path="/about"
+              exact
+              render={props => (
+                <About {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              path="/pets/:id/edit"
+              exact
+              render={props => (
+                <Edit
+                  {...props}
+                  pets={this.state && this.state.pets}
+                  getPets={this.state && this.getPets}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
+            />
+            <Route
+              path="/search"
+              exact
+              render={props => (
+                <Search {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              path="/signup"
+              render={props => {
+                return (
+                  <Signup
+                    {...props}
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleInput={this.handleInput}
+                    handleSignUp={this.handleSignUp}
+                  />
+                );
+              }}
+            />
+            <Route
+              path="/login"
+              render={props => {
+                return (
+                  <Login
+                    {...props}
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleInput={this.handleInput}
+                    handleLogIn={this.handleLogIn}
+                  />
+                );
+              }}
+            />
+          </Switch>
+        </main>
+      </div>
+    );
+  }
 }
 
 export default withRouter(App);

@@ -41,78 +41,80 @@ class New extends Component {
 				console.log(result);
 			})
 			.finally(() => this.props.getPets());
-	}
+	}												
+      
+  render() {
+    return (
+      this.props.isLoggedIn === true && (
+        <div>
+          <div className="card m-5">
+            <div className="card-body">
+              <div className="card-content">
+                <h1>Create New Pet</h1>
+                <form onSubmit={this.handleSubmit} action="/pets">
+                  <p>Name </p>
+                  <p>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      onChange={this.handleInputChange}
+                    />
+                  </p>
+                  <p>Description </p>
+                  <p>
+                    <input
+                      id="description"
+                      name="description"
+                      type="text"
+                      onChange={this.handleInputChange}
+                    />
+                  </p>
+                  <p>Species</p>
+                  <div>
+                    <p>
+                      <select
+                        className="browser-default m5"
+                        id="species"
+                        name="species"
+                        onChange={this.handleInputChange}
+                      >
+                        <option defaultValue="">Cat or Dog?</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Dog">Dog</option>
+                      </select>
+                    </p>
+                  </div>
 
-	render() {
-		return (
-			<div>
-				<div className="card m-5">
-					<div className="card-body">
-						<div className="card-content">
-							<h1>Create New Pet</h1>
-							<form onSubmit={this.handleSubmit} action="/pets">
-								<p>Name </p>
-								<p>
-									<input
-										id="name"
-										name="name"
-										type="text"
-										onChange={this.handleInputChange}
-									/>
-								</p>
-								<p>Description </p>
-								<p>
-									<input
-										id="description"
-										name="description"
-										type="text"
-										onChange={this.handleInputChange}
-									/>
-								</p>
-								<p>Species</p>
-								<div>
-									<p>
-										<select
-											className="browser-default m5"
-											id="species"
-											name="species"
-											onChange={this.handleInputChange}
-										>
-											<option defaultValue="">Cat or Dog?</option>
-											<option value="Cat">Cat</option>
-											<option value="Dog">Dog</option>
-										</select>
-									</p>
-								</div>
-
-								<p>Profile Picture Link</p>
-								<p>
-									<input
-										id="profilepicture"
-										name="profilepicture"
-										type="text"
-										onChange={this.handleInputChange}
-									/>
-								</p>
-								<p>Social Link </p>
-								<p>
-									<input
-										id="sociallink"
-										name="sociallink"
-										type="text"
-										onChange={this.handleInputChange}
-									/>
-								</p>
-								<p>
-									<button className="btn orange lighten-2">Create Pet</button>
-								</p>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+                  <p>Profile Picture Link</p>
+                  <p>
+                    <input
+                      id="profilepicture"
+                      name="profilepicture"
+                      type="text"
+                      onChange={this.handleInputChange}
+                    />
+                  </p>
+                  <p>Social Link </p>
+                  <p>
+                    <input
+                      id="sociallink"
+                      name="sociallink"
+                      type="text"
+                      onChange={this.handleInputChange}
+                    />
+                  </p>
+                  <p>
+                    <button className="btn orange lighten-2">Create Pet</button>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    );
+  }
 }
 
 export default New;
