@@ -20,14 +20,6 @@ class Pets extends Component {
                     className="profile-pic"
                   />
                 </div>
-<<<<<<< HEAD
-                <p>
-                  <Link to={"/pets/" + pet._id}>
-                    <button className="btn orange lighten-2">{pet.name}</button>
-                  </Link>
-                </p>
-                <h4>Licks - {pet.licks}</h4>
-=======
                 <h3>
                   Licks{" "}
                   <span role="img" aria-label="lick">
@@ -42,7 +34,6 @@ class Pets extends Component {
                     </Link>
                   </p>
                 </div>
->>>>>>> bug-branch
               </div>
             </div>
           </div>
