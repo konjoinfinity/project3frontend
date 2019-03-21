@@ -5,6 +5,7 @@ import axios from "axios";
 import apiUrl from "./Constants";
 
 class Pet extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -61,6 +62,7 @@ class Pet extends Component {
 		this.props.history.push(`/pets/${this.state.pet._id}/`);
 	}
 
+
 	handleInputChange(event) {
 		const target = event.target;
 		const value = target.value;
@@ -94,82 +96,83 @@ class Pet extends Component {
 		this.props.history.push(`/pets/${this.props.match.params.id}/`);
 	}
 
-	render() {
-		return (
-			<div>
-				<div className="row">
-					<div className="col">
-						<div className="card">
-							<div className="card-image">
-								<img
-									src={this.state.pet.profilepicture}
-									alt="Profile"
-									className="card-image"
-								/>
-								<span className="card-title">{this.state.pet.name}</span>
-							</div>
-							<div className="card-content">
-								<p>{this.state.pet.description}</p>
-								<h4>Species - {this.state.pet.species}</h4>
-								<button
-									onClick={this.handleLick}
-									className="btn blue lighten-2"
-								>
-									# of licks {this.state.licks}
-								</button>
-							</div>
-							<div className="card-action">
-								<Link to={this.state.pet && this.state.pet.sociallink}>
-									<i className="fab fa-twitter" />
-								</Link>
-								<Link to={"/pets/" + this.props.match.params.id + "/edit"}>
-									<button className="btn blue lighten-2">Edit Pet</button>
-								</Link>
-								<button className="btn red accent-3" onClick={this.deletePet}>
-									Delete
-								</button>
-							</div>
-						</div>
-						{this.state.pet &&
-							this.state.pet.comments.map((comment, id) => {
-								return (
-									<div className="card" key={id}>
-										<div className="card-body">
-											<div className="card-content">
-												<p>{comment.message}</p>
-											</div>
-											<div className="card-action">
-												<form
-													data-id={comment._id}
-													onSubmit={this.deleteComment}
-												>
-													<p>
-														<button className="btn red accent-3">Delete</button>
-													</p>
-												</form>
-											</div>
-										</div>
-									</div>
-								);
-							})}
-						<div className="card">
-							<div className="card-content">
-								<form onSubmit={this.handleComment}>
-									<input
-										id="comment"
-										name="comment"
-										type="text"
-										onChange={this.handleInputChange}
-									/>
-									<button className="btn orange lighten-2">Comment</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+
+  render() {
+    return (
+      <div>
+        <div className="row">
+          <div className="col">
+            <div className="card">
+              <div className="card-image">
+                <img
+                  src={this.state.pet.profilepicture}
+                  alt="Profile"
+                  className="card-image"
+                />
+                <span className="card-title">{this.state.pet.name}</span>
+              </div>
+              <div className="card-content">
+                <p>{this.state.pet.description}</p>
+                <h4>Species - {this.state.pet.species}</h4>
+                <button
+                  onClick={this.handleLick}
+                  className="btn blue lighten-2"
+                >
+                  # of licks {this.state.licks}
+                </button>
+              </div>
+              <div className="card-action">
+                <Link to={this.state.pet.sociallink}>
+                  <i className="fab fa-twitter" />
+                </Link>
+                <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
+                  <button className="btn blue lighten-2">Edit Pet</button>
+                </Link>
+                <button className="btn red accent-3" onClick={this.deletePet}>
+                  Delete
+                </button>
+              </div>
+            </div>
+            {this.state.pet &&
+              this.state.pet.comments.map((comment, id) => {
+                return (
+                  <div className="card" key={id}>
+                    <div className="card-body">
+                      <div className="card-content">
+                        <p>{comment.message}</p>
+                      </div>
+                      <div className="card-action">
+                        <form
+                          data-id={comment._id}
+                          onSubmit={this.deleteComment}
+                        >
+                          <p>
+                            <button className="btn red accent-3">Delete</button>
+                          </p>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            <div className="card">
+              <div className="card-content">
+                <form onSubmit={this.handleComment}>
+                  <input
+                    id="comment"
+                    name="comment"
+                    type="text"
+                    onChange={this.handleInputChange}
+                  />
+                  <button className="btn orange lighten-2">Comment</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Pet;

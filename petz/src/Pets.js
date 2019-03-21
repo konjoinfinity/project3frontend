@@ -22,6 +22,7 @@ class Pets extends Component {
                     <button className="btn orange lighten-2">{pet.name}</button>
                   </Link>
                 </p>
+                <h4>Licks - {pet.licks}</h4>
               </div>
             </div>
           </div>
