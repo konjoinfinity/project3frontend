@@ -49,7 +49,6 @@ class Pet extends Component {
   }
 
   handleComment(event) {
-    event.preventDefault();
     console.log(event);
     axios
       .put(apiUrl + `pets/${this.props.match.params.id}/comment`, {
@@ -102,15 +101,21 @@ class Pet extends Component {
           <div className="row">
             <div className="col">
               <div className="card">
-                <div className="card-image">
-                  <img
-                    src={this.state.pet.profilepicture}
-                    alt="Profile"
-                    className="card-image"
-                  />
-                  <span className="card-title">{this.state.pet.name}</span>
-                </div>
                 <div className="card-content">
+                  <span className="card-title">
+                    <font color="orange">
+                      {this.state.pet.name}{" "}
+                      {this.state.pet.species === "Dog" ? "🐶" : "🐱"}
+                    </font>
+                  </span>
+
+                  <div className="card-image">
+                    <img
+                      src={this.state.pet.profilepicture}
+                      alt="Profile"
+                      className="card-image"
+                    />
+                  </div>
                   <p>{this.state.pet.description}</p>
                   <h4>Species - {this.state.pet.species}</h4>
                   <button
