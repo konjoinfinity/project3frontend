@@ -56,13 +56,13 @@ _Annabelle:_ In a previous class assignment, I came up with a simple search comp
 
 ## Further Work
 
-### Fixing asyncronous requests
-
-If a user performs too many commands on a pet profile page, the server will sometimes crash. We're not 200% certain where the exact breaking point is, but we think it is related to the React component lifecycle. Curretnyl, our _Pet.js_ file contains all of the profile's display logic, meaning that one component is capable of making multiple different types of requests. If we were to refactor this file into multiple smaller components, we think that we could utilize **componentDidMount**, **componentDidUpdate**, and **componentWillUnmount** to handle these requests in a more streamlined fashion that our server can handle.
-
 ### Connect pets to users
 
 User authentication currently allows only logged-in users to access certain features, such as the ability to write a comment or delete a pet. However, we'd like to expand this so that users can create profiles for their pets and only edit those pet profiles.
+
+### Hotload comments
+
+Currently, if you add or delete a comment you need to do a full page reload in order to see the updated data. We'd like to implement hotloading (similar to how we have it for Licks) so that adding/deleting comments updates the Comments array dynamically for the user.
 
 ## Authors
 
