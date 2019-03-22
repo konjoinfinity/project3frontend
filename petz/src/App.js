@@ -125,8 +125,8 @@ class App extends Component {
               render={props => (
                 <Pet
                   {...props}
-                  pets={this.state && this.state.pets}
-                  getPets={this.state && this.getPets}
+                  pets={this.state.pets}
+                  getPets={this.getPets}
                   isLoggedIn={this.state.isLoggedIn}
                 />
               )}
@@ -137,7 +137,7 @@ class App extends Component {
               render={props => (
                 <Pets
                   {...props}
-                  pets={this.state && this.state.pets}
+                  pets={this.state.pets}
                   isLoggedIn={this.state.isLoggedIn}
                 />
               )}
@@ -148,8 +148,8 @@ class App extends Component {
               render={props => (
                 <New
                   {...props}
-                  pets={this.state && this.state.pets}
-                  getPets={this.state && this.getPets}
+                  pets={this.state.pets}
+                  getPets={this.getPets}
                   isLoggedIn={this.state.isLoggedIn}
                 />
               )}
@@ -167,8 +167,8 @@ class App extends Component {
               render={props => (
                 <Edit
                   {...props}
-                  pets={this.state && this.state.pets}
-                  getPets={this.state && this.getPets}
+                  pets={this.state.pets}
+                  getPets={this.getPets}
                   isLoggedIn={this.state.isLoggedIn}
                 />
               )}

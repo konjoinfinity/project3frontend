@@ -116,9 +116,7 @@ class Pet extends Component {
                     />
                   </div>
                   <p>{this.state.pet.description}</p>
-                  <h4 className="species">
-                    Species - {this.state.pet.species}
-                  </h4>
+                  <h4>Species - {this.state.pet.species}</h4>
                   <div>
                     <button
                       onClick={this.handleLick}
