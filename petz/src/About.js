@@ -8,7 +8,7 @@ class About extends Component {
         <div>
           <h1>About the Co-Founders</h1>
           <div className="about-card">
-            <img src="https://i.imgur.com/w2bQF9Q.jpg" alt="" />
+            <img src="https://i.imgur.com/w2bQF9Q.jpg" alt="Annabelle" />
             <div className="cofounder-info">
               <h3>Annabelle Taylor</h3>
               <p>
@@ -20,7 +20,7 @@ class About extends Component {
             </div>
           </div>
           <div className="about-card">
-            <img src="https://i.imgur.com/0cV0XWS.jpg" alt="" />
+            <img src="https://i.imgur.com/0cV0XWS.jpg" alt="Cathy" />
             <div className="cofounder-info">
               <h3>Cathy Le</h3>
               <p>
@@ -32,7 +32,7 @@ class About extends Component {
             </div>
           </div>
           <div className="about-card">
-            <img src="https://i.imgur.com/A8eQsll.jpg" alt="" />
+            <img src="https://i.imgur.com/A8eQsll.jpg" alt="Konjo" />
             <div className="cofounder-info">
               <h3>Wesley Scholl (Konjo)</h3>
               <p>
