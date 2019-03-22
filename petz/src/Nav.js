@@ -12,31 +12,118 @@ class Nav extends Component {
             <a href="/" className="brand-logo">
               <img src={petzlogo} alt="logo" className="logo" />
             </a>
-            <ul className="right">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/pets">Pets</Link>
-              </li>
-              <li>
-                <Link to="/new">New</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/signin">Sign In</Link>
-              </li>
-              <li>
-                <Link to="/signup">Sign Up</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
+            <a href="/" className="sidenav-trigger" data-target="mobile-nav">
+              <i className="material-icons">menu</i>
+            </a>
+            <ul className="right hide-on-med-and-down">
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/pets">Pets</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/new">New</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/search">Search</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === false && (
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === false && (
+                <li>
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              )}
+              {this.props.isLoggedIn === true && (
+                <li>
+                  <Link to="/logout" onClick={this.props.handleLogOut}>
+                    Logout
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
+
+        <ul className="sidenav" id="mobile-nav">
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/" className="sidenav-close">
+                Home
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/pets" className="sidenav-close">
+                Pets
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/new" className="sidenav-close">
+                New
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/search" className="sidenav-close">
+                Search
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link to="/about" className="sidenav-close">
+                About
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === false && (
+            <li>
+              <Link to="/login" className="sidenav-close">
+                Login
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === false && (
+            <li>
+              <Link to="/signup" className="sidenav-close">
+                Sign Up
+              </Link>
+            </li>
+          )}
+          {this.props.isLoggedIn === true && (
+            <li>
+              <Link
+                to="/logout"
+                onClick={this.props.handleLogOut}
+                className="sidenav-close"
+              >
+                Logout
+              </Link>
+            </li>
+          )}
+        </ul>
       </div>
     );
   }

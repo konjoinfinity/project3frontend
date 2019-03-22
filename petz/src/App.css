@@ -17,3 +17,30 @@ i {
   max-height: 55px;
   max-width: 55px;
 }
+
+.profile-pic {
+  max-width: 160px;
+  max-height: 160px;
+}
+
+.pets-index {
+  background: #e4f6fd;
+}
+
+.pets-cards {
+  margin: 20px;
+}
+
+.container-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.instagram {
+  margin: 0px 15px;
+}
+
+.licks {
+  margin: 0px 0px 23px 0px;
+}
