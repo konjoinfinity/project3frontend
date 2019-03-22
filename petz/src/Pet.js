@@ -126,13 +126,15 @@ class Pet extends Component {
                     >
                       # of licks {this.state.licks}
                     </button>
-                    <a href={this.state.pet.sociallink}>
-                      <img
-                        className="instagram"
-                        src="https://www.instagram.com/favicon.ico"
-                        alt=""
-                      />
-                    </a>
+                    {this.state.pet.sociallink !== undefined ? (
+                      <a href={this.state.pet.sociallink}>
+                        <img
+                          className="instagram"
+                          src="https://www.instagram.com/favicon.ico"
+                          alt=""
+                        />
+                      </a>
+                    ) : null}
                   </div>
                 </div>
                 <div className="card-action">
