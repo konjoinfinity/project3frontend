@@ -11,21 +11,21 @@ class About extends Component {
             <img src="https://i.imgur.com/mJ0NvPe.jpg" alt="" />
             <div className="cofounder-info">
               <h3>Annabelle Taylor</h3>
-              <p>blah blah blah</p>
+              <p>blah blah blah blah blah blah blah blah blah blah blah blah</p>
             </div>
           </div>
           <div className="about-card">
             <img src="https://i.imgur.com/0cV0XWS.jpg" alt="" />
             <div className="cofounder-info">
               <h3>Cathy Le</h3>
-              <p>blah blah blah</p>
+              <p>blah blah blah blah blah blah blah blah blah blah blah blah</p>
             </div>
           </div>
           <div className="about-card">
             <img src="https://i.imgur.com/A8eQsll.jpg" alt="" />
             <div className="cofounder-info">
               <h3>Wesley Scholl (Konjo)</h3>
-              <p>blah blah blah</p>
+              <p>blah blah blah blah blah blah blah blah blah blah blah blah</p>
             </div>
           </div>
         </div>
