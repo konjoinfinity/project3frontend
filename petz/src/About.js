@@ -18,7 +18,12 @@ class About extends Component {
             <img src="https://i.imgur.com/0cV0XWS.jpg" alt="" />
             <div className="cofounder-info">
               <h3>Cathy Le</h3>
-              <p>blah blah blah blah blah blah blah blah blah blah blah blah</p>
+              <p>
+                Cathy is an aspirating Software Engineer that dreams of a world
+                where there is kibble in every bowl and a leash in every hand.
+                This web app is her first group project. Looking forward to
+                more!
+              </p>
             </div>
           </div>
           <div className="about-card">
