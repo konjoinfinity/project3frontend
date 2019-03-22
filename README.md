@@ -44,11 +44,11 @@ Handling our frontend required us to lean a bit more into our workflow plan. We 
 
 ### Licks
 
-_Cathy:_
+_Cathy:_ Similar to users liking a Facebook profile, users can “lick” a pet profile. The backend was set up first, adding a PUT request to a lick route I created. I used the **\$inc** operator to increment the document property licks so that for every put request made, the lick value would increase by one. After that was successfully tested in Postman, the frontend was handled by making an API request to capture the pet object and set this.state.licks to the lick value. I created a handleLick that, when the lick button is clicked, a PUT request is sent to the back end to increment the lick value by one. The response sent will set this.state.licks to the new lick value, therefore hotloading the new lick value on the browser.
 
 ### Comments
 
-_Konjo:_
+_Konjo:_ I became proficient in adding and deleting comments as sub document models in a previous lab. I wanted to add comments to this app and take it a step further. After the comments are posted, we as a group added a most recent comment feature which finds all the comments and sorts them based on their timestamp. This was accomplished using the **.sort** method using the **createdAt: -1** property. After a pet comment is created the user is redirected to the comment index which shows the most recent comments.
 
 ### Search
 
@@ -58,7 +58,7 @@ _Annabelle:_ In a previous class assignment, I came up with a simple search comp
 
 ### Fixing asyncronous requests
 
-If a user performs too many commands on a pet profile page, the server will sometimes crash. We're not 200% certain what the exact breaking point is, but we think it is related to the component lifecycle. Right now, our _Pet.js_ file contains all of the logic for the profile, meaning that one component is making multiple different types of requests. If we were to refactor this file into multiple smaller components, we think that we can utilize componentDidMount() and componentDidDismount() to handle these requests in a more streamlined fashion that our server can handle
+If a user performs too many commands on a pet profile page, the server will sometimes crash. We're not 200% certain what the exact breaking point is, but we think it is related to the component lifecycle. Right now, our _Pet.js_ file contains all of the logic for the profile, meaning that one component is making multiple different types of requests. If we were to refactor this file into multiple smaller components, we think that we can utilize componentDidMount() and componentWillUnmount() to handle these requests in a more streamlined fashion that our server can handle
 
 ### Connect pets to users
 
@@ -75,5 +75,5 @@ Meet Team KAC Stack!
 ## Acknowledgments
 
 - We took some inspiration and guidance from a couple of example projects we saw in class, most prominently Express Twitter. Sometimes, the best way to figure out a tricky bit of code is to see it "in the wild."
-- Thanks to our excelllent instructors, [Hammad Malik](https://github.com/tomatohammado) and [Zakk Fleischmann], for their ongoing support and encouragement.
+- Thanks to our excelllent instructors, [Hammad Malik](https://github.com/tomatohammado) and [Zakk Fleischmann](https://github.com/zakkman), for their ongoing support and encouragement.
 - A special shoutout to our fellow SEI2 classmates for volunteering pictures of their beloved cats and dogs for our seed data! They are all the best boys and girls.
