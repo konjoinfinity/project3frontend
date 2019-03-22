@@ -36,3 +36,15 @@ i {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.instagram {
+  margin: 30px 15px 0px 15px;
+}
+
+/* .species {
+  padding: 15px;
+} */
+
+.licks {
+  margin: 0px 0px 23px 0px;
+}

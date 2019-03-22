@@ -116,18 +116,26 @@ class Pet extends Component {
                     />
                   </div>
                   <p>{this.state.pet.description}</p>
-                  <h4>Species - {this.state.pet.species}</h4>
-                  <button
-                    onClick={this.handleLick}
-                    className="btn blue lighten-2"
-                  >
-                    # of licks {this.state.licks}
-                  </button>
+                  <h4 className="species">
+                    Species - {this.state.pet.species}
+                  </h4>
+                  <div>
+                    <button
+                      onClick={this.handleLick}
+                      className="licks btn blue lighten-2"
+                    >
+                      # of licks {this.state.licks}
+                    </button>
+                    <a href={this.state.pet.sociallink}>
+                      <img
+                        className="instagram"
+                        src="https://www.instagram.com/favicon.ico"
+                        alt=""
+                      />
+                    </a>
+                  </div>
                 </div>
                 <div className="card-action">
-                  <Link to={this.state.pet && this.state.pet.sociallink}>
-                    <i className="fab fa-twitter" />
-                  </Link>
                   <Link to={"/pets/" + this.props.match.params.id + "/edit"}>
                     <button className="btn blue lighten-2">Edit Pet</button>
                   </Link>
