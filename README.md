@@ -2,6 +2,8 @@
 
 A social media app for pets. Find your favorite pets, write them some comments, give your pals a lick, and create a profile for your pet!
 
+![alt text](https://i.imgur.com/tkUYcsJ.png "Petz")
+
 ## Installation
 
 You can access the live version of this app at [petz-frontend.surge.sh](http://petz-frontend.surge.sh/), but if you'd like to clone down a local version of this app for your own tinkering, follow these instructions:
@@ -34,7 +36,7 @@ By default, the React frontend will load on _localhost:3000_ and the Express bac
 
 ## Development and Planning
 
-For a more in-depth look at our initial planning, take a look at [this document in our backend repo](https://github.com/konjoinfinity/project3backend/blob/master/planning.md). In a nutshell, though, we started by defining our models (**Pet** and **Comment**, with the eventual addition of **User**) and considering everything that each model needed to accomplish. For example, we needed to have full CRUD on **Pet**, but we just wanted Create and Delete on **Comment** and simply Create on **User**. This influenced our routes and controllers, which in turn allowed us to quickly create much of the boilerplate for our backend.
+For a more in-depth look at our initial planning, take a look at [this document in our backend repo](https://github.com/konjoinfinity/project3backend/blob/master/planning.md). Additionally, you can look at some rudimentary wireframes in this repo's [planning directory](https://github.com/konjoinfinity/project3frontend/tree/dev/planning). In a nutshell, though, we started by defining our models (**Pet** and **Comment**, with the eventual addition of **User**) and considering everything that each model needed to accomplish. For example, we needed to have full CRUD on **Pet**, but we just wanted Create and Delete on **Comment** and simply Create on **User**. This influenced our routes and controllers, which in turn allowed us to quickly create much of the boilerplate for our backend.
 
 Handling our frontend required us to lean a bit more into our workflow plan. We used a mix of GitFlow and Feature Branching: everyone started the day on their own branch that described what they were to accomplish that day, then at the end of the day we'd merge into a central Development branch. From there, we could debug any stray oddities and finally merge Development into Master. If something were to show up 15 minutes before presentation time (knock on wood), we would be able to create a smalll hotfix branch off of Master.
 
