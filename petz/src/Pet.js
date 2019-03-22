@@ -48,7 +48,8 @@ class Pet extends Component {
   }
 
   handleComment(event) {
-    console.log(event);
+    event.preventDefault();
+    this.props.getPets();
     axios
       .put(apiUrl + `pets/${this.props.match.params.id}/comment`, {
         message: this.state.comment
@@ -57,8 +58,7 @@ class Pet extends Component {
       .then(result => {
         console.log(result);
       });
-    this.componentDidMount();
-    this.props.history.push(`/pets/${this.props.match.params.id}/`);
+    this.props.history.push("/");
   }
 
   handleInputChange(event) {
@@ -80,7 +80,7 @@ class Pet extends Component {
   }
 
   deleteComment(event) {
-    console.log(event);
+    event.preventDefault();
     axios
       .put(apiUrl + `pets/${this.state.pet._id}/comment/delete`, {
         body: event.target.dataset.id
