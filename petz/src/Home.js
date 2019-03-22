@@ -12,15 +12,14 @@ class Home extends Component {
     };
   }
 
-	componentDidMount() {
-		axios
-			.get(apiUrl + "comments")
-			.then(res => {
-				this.setState({ comments: res.data });
-			})
-			.catch(err => console.log(err));
-	}
-
+  componentDidMount() {
+    axios
+      .get(apiUrl + "comments")
+      .then(res => {
+        this.setState({ comments: res.data });
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     let results = [];
