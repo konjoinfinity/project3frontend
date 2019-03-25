@@ -66,8 +66,9 @@ class Pet extends Component {
       .then(response => console.log(response))
       .then(result => {
         console.log(result);
+        this.getPet();
       });
-    this.props.history.push("/");
+    this.props.history.push(`/pets/${this.props.match.params.id}/`);
   }
 
   handleInputChange(event) {
