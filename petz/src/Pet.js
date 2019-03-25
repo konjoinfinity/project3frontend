@@ -18,6 +18,7 @@ class Pet extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleComment = this.handleComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
+    this.getPet = this.getPet.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +28,14 @@ class Pet extends Component {
         this.setState({ pet: res });
         this.setState({ licks: res.licks });
         this.setState({ comments: res.comments });
+      });
+  }
+
+  getPet() {
+    fetch(apiUrl + `pets/${this.props.match.params.id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ pet: res });
       });
   }
 
@@ -88,8 +97,8 @@ class Pet extends Component {
       .then(response => console.log(response))
       .then(result => {
         console.log(result);
+        this.getPet();
       });
-    this.componentDidMount();
     this.props.history.push(`/pets/${this.props.match.params.id}/`);
   }
 
