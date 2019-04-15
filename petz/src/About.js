@@ -32,7 +32,7 @@ class About extends Component {
             </div>
           </div>
           <div className="about-card">
-            <img src="https://i.imgur.com/A8eQsll.jpg" alt="Konjo" />
+            <img src="https://i.imgur.com/ZatpxJz.jpg" alt="Konjo" />
             <div className="cofounder-info">
               <h3>Wesley Scholl (Konjo)</h3>
               <p>
